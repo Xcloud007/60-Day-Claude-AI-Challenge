@@ -1,0 +1,197 @@
+
+<style>
+.section { margin: 0 0 2rem; }
+.section-title { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px; padding-bottom: 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+.metric-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+.metric-label { font-size: 11px; color: var(--color-text-secondary); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.metric-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+.metric-sub { font-size: 11px; color: var(--color-text-secondary); margin: 2px 0 0; }
+.badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); font-weight: 500; }
+.badge-green { background: var(--color-background-success); color: var(--color-text-success); }
+.badge-amber { background: var(--color-background-warning); color: var(--color-text-warning); }
+.badge-red { background: var(--color-background-danger); color: var(--color-text-danger); }
+.badge-blue { background: var(--color-background-info); color: var(--color-text-info); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ownership-bar { height: 16px; border-radius: 8px; display: flex; overflow: hidden; margin: 8px 0 12px; }
+.verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.verdict-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px; }
+.verdict-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); margin: 0 0 6px; }
+.verdict-text { font-size: 13px; color: var(--color-text-primary); margin: 0; line-height: 1.5; }
+</style>
+
+<h2 class="sr-only">Apple Inc (AAPL) — Fundamental Research Dashboard with financial metrics, valuation, ownership and verdict.</h2>
+
+<div style="padding: 1rem 0 0;">
+
+<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; flex-wrap:wrap; gap:8px;">
+  <div>
+    <div style="font-size:22px; font-weight:500; color:var(--color-text-primary);">Apple Inc <span style="font-size:15px; color:var(--color-text-secondary);">NASDAQ: AAPL</span></div>
+    <div style="font-size:13px; color:var(--color-text-secondary); margin-top:2px;">Technology · Consumer Electronics · Software & Services</div>
+  </div>
+  <div style="text-align:right;">
+    <div style="font-size:22px; font-weight:500; color:var(--color-text-primary);">~$296</div>
+    <div style="font-size:12px; color:var(--color-text-secondary);">as of Jun 17, 2026</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Key metrics at a glance</div>
+  <div class="metric-grid">
+    <div class="metric-card">
+      <div class="metric-label">Market cap</div>
+      <div class="metric-value">$4.38T</div>
+      <div class="metric-sub">Mega-cap</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">FY2025 revenue</div>
+      <div class="metric-value">$416B</div>
+      <div class="metric-sub">+6% YoY</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">FY2025 net income</div>
+      <div class="metric-value">~$94B</div>
+      <div class="metric-sub">Net margin ~23%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">TTM free cash flow</div>
+      <div class="metric-value">$129B</div>
+      <div class="metric-sub">EV/FCF 33.2x</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Trailing P/E</div>
+      <div class="metric-value">35.7x</div>
+      <div class="metric-sub">10-yr avg 24.5x</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">EV/EBITDA</div>
+      <div class="metric-value">26.8x</div>
+      <div class="metric-sub">Premium multiple</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">ROE</div>
+      <div class="metric-value">141%</div>
+      <div class="metric-sub">Exceptional</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Dividend yield</div>
+      <div class="metric-value">0.35%</div>
+      <div class="metric-sub">$1.04/share/yr</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Revenue trend (FY2021–FY2025, $B)</div>
+  <div style="position:relative; width:100%; height:220px;">
+    <canvas id="revChart" role="img" aria-label="Apple annual revenue from FY2021 to FY2025: 365, 394, 383, 391, 416 billion dollars">Revenue: FY21 $365B, FY22 $394B, FY23 $383B, FY24 $391B, FY25 $416B</canvas>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Margin profile (FY2025)</div>
+  <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px;">
+    <div class="metric-card">
+      <div class="metric-label">Gross margin</div>
+      <div class="metric-value">47.9%</div>
+      <div class="metric-sub badge badge-green" style="margin-top:4px; display:inline-block;">Record high</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Operating margin</div>
+      <div class="metric-value">32.6%</div>
+      <div class="metric-sub" style="color:var(--color-text-secondary);">Best-in-class</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Net margin</div>
+      <div class="metric-value">27.2%</div>
+      <div class="metric-sub" style="color:var(--color-text-secondary);">vs industry ~4%</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Valuation summary</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+    <span class="badge badge-amber">Trailing P/E 35.7x — 46% above 10-yr avg</span>
+    <span class="badge badge-blue">PEG ratio 1.26 — reasonable vs growth</span>
+    <span class="badge badge-amber">GuruFocus: modestly overvalued (~10%)</span>
+  </div>
+  <div style="font-size:13px; color:var(--color-text-secondary); line-height:1.6;">
+    Forward P/E of ~32x reflects Services growth narrative. Analyst consensus price target ~$313 (Buy rating). Premium justified by ecosystem durability, buyback engine, and high-margin Services scaling toward $120B+ annually.
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Ownership structure</div>
+  <div style="font-size:12px; color:var(--color-text-secondary); margin-bottom:6px; display:flex; gap:16px; flex-wrap:wrap;">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#378ADD;display:inline-block;"></span>Institutional 63.8%</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#1D9E75;display:inline-block;"></span>Retail 36.1%</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#D85A30;display:inline-block;"></span>Insiders 0.12%</span>
+  </div>
+  <div class="ownership-bar">
+    <div style="width:63.8%;background:#378ADD;"></div>
+    <div style="width:36.1%;background:#1D9E75;"></div>
+    <div style="width:0.12%;background:#D85A30;"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--color-text-secondary);">
+    <div>Vanguard: 9.5% · BlackRock: 7.8%</div>
+    <div>State Street: 4.1% · Berkshire: 1.6%</div>
+    <div>JP Morgan: 3.2% · Geode: 2.4%</div>
+    <div>CEO Tim Cook: ~3.28M shares (~0.02%)</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Final verdict</div>
+  <div class="verdict-grid">
+    <div class="verdict-card" style="border-left: 2px solid var(--color-border-success);">
+      <div class="verdict-label" style="color:var(--color-text-success);">Bull case</div>
+      <div class="verdict-text">Apple Intelligence driving iPhone 17 upgrade supercycle. Services at $109B+ growing 14% YoY at ~75% margin. Installed base of 2.5B devices. $129B FCF + aggressive buybacks compounding EPS.</div>
+    </div>
+    <div class="verdict-card" style="border-left: 2px solid var(--color-border-danger);">
+      <div class="verdict-label" style="color:var(--color-text-danger);">Bear case</div>
+      <div class="verdict-text">P/E 35.7x, 46% above 10-yr avg. China revenue headwinds, tariff risk on supply chain. Tim Cook retirement adds leadership uncertainty. Siri AI delays vs OpenAI/Google.</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-label">Suitable for</div>
+      <div class="verdict-text">Long-term investors, quality compounders. Not ideal for pure dividend seekers or short-term traders.</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-label">Risk · Outlook</div>
+      <div class="verdict-text"><span class="badge badge-amber" style="margin-right:6px;">Medium risk</span><span class="badge badge-blue">Positive outlook</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const textColor = isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.45)';
+const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+new Chart(document.getElementById('revChart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY2021','FY2022','FY2023','FY2024','FY2025'],
+    datasets: [{
+      label: 'Revenue ($B)',
+      data: [365, 394, 383, 391, 416],
+      backgroundColor: ['#5DCAA5','#5DCAA5','#5DCAA5','#5DCAA5','#1D9E75'],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ' $' + ctx.parsed.y + 'B' } }
+    },
+    scales: {
+      x: { ticks: { color: textColor, autoSkip: false }, grid: { display: false } },
+      y: { ticks: { color: textColor, callback: v => '$' + v + 'B' }, grid: { color: gridColor }, min: 340, max: 440 }
+    }
+  }
+});
+</script>

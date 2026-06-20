@@ -1,0 +1,267 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.report{padding:1rem 0}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--border-radius-md)}
+.section{margin-bottom:2rem}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:.5px solid var(--color-border-tertiary)}
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1rem}
+.metric-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem}
+.metric-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.metric-value{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.metric-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:.75rem}
+.row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:.5px solid var(--color-border-tertiary);font-size:14px}
+.row:last-child{border-bottom:none}
+.row-label{color:var(--color-text-secondary)}
+.row-val{font-weight:500;color:var(--color-text-primary)}
+.pill-green{background:#EAF3DE;color:#3B6D11;font-size:11px;padding:2px 8px;border-radius:20px}
+.pill-amber{background:#FAEEDA;color:#854F0B;font-size:11px;padding:2px 8px;border-radius:20px}
+.pill-red{background:#FCEBEB;color:#A32D2D;font-size:11px;padding:2px 8px;border-radius:20px}
+.pill-blue{background:#E6F1FB;color:#185FA5;font-size:11px;padding:2px 8px;border-radius:20px}
+.seg-bar{display:flex;height:18px;border-radius:4px;overflow:hidden;margin:8px 0}
+.seg-label{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--color-text-secondary);margin-top:6px}
+.seg-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.header-bar{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.company-logo{width:48px;height:48px;background:#E6F1FB;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#185FA5}
+.verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.verdict-card{border-radius:var(--border-radius-md);padding:.75rem 1rem;border:.5px solid var(--color-border-tertiary)}
+.bull{background:#EAF3DE;border-color:#C0DD97}
+.bear{background:#FCEBEB;border-color:#F7C1C1}
+.bull-title{color:#3B6D11;font-size:12px;font-weight:500;margin-bottom:6px}
+.bear-title{color:#A32D2D;font-size:12px;font-weight:500;margin-bottom:6px}
+.bull li,.bear li{font-size:12px;margin-left:14px;margin-bottom:3px}
+.bull li{color:#27500A}
+.bear li{color:#791F1F}
+.risk-bar{height:8px;border-radius:4px;background:linear-gradient(to right,#639922,#EF9F27,#E24B4A);position:relative;margin:6px 0}
+.risk-marker{width:14px;height:14px;border-radius:50%;background:var(--color-background-primary);border:2px solid #EF9F27;position:absolute;top:-3px;transform:translateX(-50%)}
+</style>
+<div class="report">
+
+<div class="header-bar">
+  <div class="company-logo">RIL</div>
+  <div>
+    <div style="font-size:18px;font-weight:500;color:var(--color-text-primary)">Reliance Industries Ltd</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-top:3px">NSE: RELIANCE &nbsp;|&nbsp; BSE: 500325 &nbsp;|&nbsp; <span class="pill-blue">Large Cap</span> &nbsp;<span class="pill-green">Conglomerate</span></div>
+  </div>
+  <div style="margin-left:auto;text-align:right">
+    <div style="font-size:22px;font-weight:500;color:var(--color-text-primary)">₹1,309</div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">CMP (Jun 19, 2026)</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Key metrics snapshot</div>
+  <div class="metric-grid">
+    <div class="metric-card">
+      <div class="metric-label">Market cap</div>
+      <div class="metric-value">₹17.7L Cr</div>
+      <div class="metric-sub">~$212B USD</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue FY25</div>
+      <div class="metric-value">₹9.65L Cr</div>
+      <div class="metric-sub">+7.1% YoY</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Net profit FY25</div>
+      <div class="metric-value">₹69,648 Cr</div>
+      <div class="metric-sub">Net margin ~7.2%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">EPS (FY25)</div>
+      <div class="metric-value">₹51.47</div>
+      <div class="metric-sub">vs ₹52.88 est.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">ROE (FY25)</div>
+      <div class="metric-value">9.88%</div>
+      <div class="metric-sub">3-yr avg ~8.8%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Debt / Equity</div>
+      <div class="metric-value">0.34x</div>
+      <div class="metric-sub">Improving trend</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Dividend (FY26)</div>
+      <div class="metric-value">₹6/share</div>
+      <div class="metric-sub">Yield ~0.46%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">P/E ratio</div>
+      <div class="metric-value">~25–27x</div>
+      <div class="metric-sub">Sector: 20–30x</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Revenue & profit trend (FY21–FY25, ₹ Cr)</div>
+  <div style="position:relative;width:100%;height:260px">
+    <canvas id="revChart" role="img" aria-label="Revenue and net profit trend from FY21 to FY25">Revenue grew from ~5.39L Cr in FY21 to 9.65L Cr in FY25. Net profit rose from ~53,739 Cr to 69,648 Cr over the same period.</canvas>
+  </div>
+  <div style="display:flex;gap:16px;margin-top:8px;font-size:12px;color:var(--color-text-secondary)">
+    <span><span class="seg-dot" style="background:#378ADD"></span>Revenue (₹ Cr)</span>
+    <span><span class="seg-dot" style="background:#1D9E75"></span>Net Profit (₹ Cr)</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Financial ratios</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="row"><span class="row-label">Gross margin</span><span class="row-val">~26%</span></div>
+      <div class="row"><span class="row-label">EBITDA margin</span><span class="row-val">~16–18%</span></div>
+      <div class="row"><span class="row-label">Net margin</span><span class="row-val">~7.2%</span></div>
+      <div class="row"><span class="row-label">ROE</span><span class="row-val">9.88%</span></div>
+      <div class="row"><span class="row-label">ROCE</span><span class="row-val">~8–9%</span></div>
+    </div>
+    <div class="card">
+      <div class="row"><span class="row-label">P/E ratio</span><span class="row-val">~25–27x</span></div>
+      <div class="row"><span class="row-label">P/B ratio</span><span class="row-val">~2.2x</span></div>
+      <div class="row"><span class="row-label">EV/EBITDA</span><span class="row-val">~12–14x</span></div>
+      <div class="row"><span class="row-label">Dividend yield</span><span class="row-val">~0.46%</span></div>
+      <div class="row"><span class="row-label">Debt coverage (OCF)</span><span class="row-val">51.4%</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Shareholding pattern (Mar 2026)</div>
+  <div class="seg-bar">
+    <div style="width:50%;background:#185FA5"></div>
+    <div style="width:18.7%;background:#1D9E75"></div>
+    <div style="width:20.6%;background:#EF9F27"></div>
+    <div style="width:10.7%;background:#888780"></div>
+  </div>
+  <div class="seg-label">
+    <span><span class="seg-dot" style="background:#185FA5"></span>Promoters 50.0%</span>
+    <span><span class="seg-dot" style="background:#1D9E75"></span>FII 18.7%</span>
+    <span><span class="seg-dot" style="background:#EF9F27"></span>DII 20.6%</span>
+    <span><span class="seg-dot" style="background:#888780"></span>Public 10.7%</span>
+  </div>
+  <div style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">Promoter stake stable at 50%. No pledged shares of concern. MF holding marginally reduced from 9.66% → 9.52%.</div>
+</div>
+
+<div class="section">
+  <div class="section-title">Business segments — EBITDA contribution</div>
+  <div class="card">
+    <div class="row"><span class="row-label">Oil-to-Chemicals (O2C)</span><span class="row-val">~45% <span class="pill-amber">Mature / Margin pressure</span></span></div>
+    <div class="row"><span class="row-label">Jio Platforms (Digital)</span><span class="row-val">~30% <span class="pill-green">High growth</span></span></div>
+    <div class="row"><span class="row-label">Reliance Retail</span><span class="row-val">~18% <span class="pill-green">Scaling fast</span></span></div>
+    <div class="row"><span class="row-label">Oil & Gas E&P</span><span class="row-val">~5% <span class="pill-blue">Stable</span></span></div>
+    <div class="row"><span class="row-label">New Energy</span><span class="row-val">~2% <span class="pill-blue">Early stage</span></span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Growth drivers</div>
+  <div class="card">
+    <div class="row"><span class="row-label">Jio IPO</span><span class="row-val pill-green">DRHP filed Jun 2026</span></div>
+    <div class="row"><span class="row-label">Jio ARPU growth</span><span class="row-val">14% YoY to ₹236 by Mar 2026</span></div>
+    <div class="row"><span class="row-label">Retail EBITDA CAGR</span><span class="row-val">35–40% (Bernstein)</span></div>
+    <div class="row"><span class="row-label">5G rollout (FWA)</span><span class="row-val">Driving subscriber growth</span></div>
+    <div class="row"><span class="row-label">New Energy (Solar/Battery)</span><span class="row-val">10 GW solar + 30 GWh battery by 2026</span></div>
+    <div class="row"><span class="row-label">EPS CAGR FY26–28E</span><span class="row-val">~14% (ICICI Securities)</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Bull vs. bear case</div>
+  <div class="verdict-grid">
+    <div class="verdict-card bull">
+      <div class="bull-title">Bull case</div>
+      <ul class="bull">
+        <li>Jio IPO unlocks massive value; could be India's biggest listing</li>
+        <li>Retail set to grow 3x in 3–5 years</li>
+        <li>New Energy could add $36B+ in market cap</li>
+        <li>Jio EBITDA forecast up 23% in FY26</li>
+        <li>Debt steadily declining, balance sheet improving</li>
+        <li>AI partnership with Meta for data centers</li>
+      </ul>
+    </div>
+    <div class="verdict-card bear">
+      <div class="bear-title">Bear case</div>
+      <ul class="bear">
+        <li>O2C margins under pressure from global crude cycles</li>
+        <li>Weak ROE (~9–10%) for a conglomerate of this size</li>
+        <li>High capex intensity — 5G, New Energy still cash-consuming</li>
+        <li>Stock down ~10% in 1 year</li>
+        <li>Regulatory risks in telecom & retail</li>
+        <li>Global macro slowdown could hurt O2C demand</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Risk rating</div>
+  <div class="card" style="padding:.75rem 1.25rem">
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:8px">Overall risk: <strong style="color:var(--color-text-primary)">Medium</strong></div>
+    <div class="risk-bar"><div class="risk-marker" style="left:45%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-tertiary);margin-top:4px"><span>Low</span><span>Medium</span><span>High</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Analyst targets</div>
+  <div class="card">
+    <div class="row"><span class="row-label">Morgan Stanley</span><span class="row-val">₹1,602 — Overweight</span></div>
+    <div class="row"><span class="row-label">ICICI Securities</span><span class="row-val">₹1,570 — Add</span></div>
+    <div class="row"><span class="row-label">CLSA</span><span class="row-val">₹1,409 — Outperform</span></div>
+    <div class="row"><span class="row-label">Bestmate (aggressive)</span><span class="row-val">₹2,000 (2-yr horizon)</span></div>
+    <div class="row"><span class="row-label">Intrinsic value (median)</span><span class="row-val">₹1,561 — Fairly valued</span></div>
+  </div>
+</div>
+
+<div style="font-size:11px;color:var(--color-text-tertiary);padding:.75rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-top:.5rem">
+  For educational purposes only. Not financial advice. Please consult a SEBI-registered investment advisor before making investment decisions.
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const ctx = document.getElementById('revChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['FY21','FY22','FY23','FY24','FY25'],
+    datasets: [
+      {
+        label: 'Revenue',
+        data: [539238, 721634, 877193, 901287, 964838],
+        backgroundColor: '#378ADD',
+        yAxisID: 'y'
+      },
+      {
+        label: 'Net Profit',
+        data: [53739, 60705, 66702, 69621, 69648],
+        backgroundColor: '#1D9E75',
+        yAxisID: 'y2'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: {
+        position: 'left',
+        ticks: { callback: v => '₹' + (v/100000).toFixed(1) + 'L', font: { size: 11 } },
+        grid: { color: 'rgba(128,128,128,0.1)' }
+      },
+      y2: {
+        position: 'right',
+        ticks: { callback: v => '₹' + Math.round(v/1000) + 'K', font: { size: 11 } },
+        grid: { display: false }
+      },
+      x: { ticks: { font: { size: 12 } }, grid: { display: false } }
+    }
+  }
+});
+</script>

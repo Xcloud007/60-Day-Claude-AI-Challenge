@@ -1,0 +1,256 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary)}
+.report{padding:1.5rem 0;max-width:680px}
+.header{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem 1.5rem;margin-bottom:1.5rem;border:0.5px solid var(--color-border-tertiary)}
+.ticker-badge{display:inline-block;background:#E6F1FB;color:#0C447C;font-size:11px;font-weight:500;padding:3px 8px;border-radius:4px;margin-right:6px}
+.section{margin-bottom:1.5rem}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1rem}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem}
+.metric-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.metric-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.metric-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin:2px 2px 2px 0;font-weight:500}
+.tag-green{background:#EAF3DE;color:#3B6D11}
+.tag-amber{background:#FAEEDA;color:#854F0B}
+.tag-red{background:#FCEBEB;color:#A32D2D}
+.tag-blue{background:#E6F1FB;color:#185FA5}
+.tag-gray{background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.verdict-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem}
+.verdict-card.bull{border-left:3px solid #639922}
+.verdict-card.bear{border-left:3px solid #E24B4A}
+.verdict-label{font-size:11px;font-weight:500;margin-bottom:6px}
+.verdict-label.bull{color:#3B6D11}
+.verdict-label.bear{color:#A32D2D}
+li{font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-left:1.25rem;margin-bottom:3px}
+.ownership-bar{display:flex;height:18px;border-radius:6px;overflow:hidden;margin:8px 0}
+.own-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#fff}
+.fin-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.fin-row:last-child{border-bottom:none}
+.fin-label{color:var(--color-text-secondary)}
+.fin-value{font-weight:500;color:var(--color-text-primary)}
+.final-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:0.75rem}
+.final-pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary)}
+.disclaimer{font-size:11px;color:var(--color-text-tertiary);margin-top:1.5rem;padding-top:0.75rem;border-top:0.5px solid var(--color-border-tertiary);line-height:1.6}
+</style>
+
+<div class="report">
+  <div class="header">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+      <div>
+        <div style="margin-bottom:6px">
+          <span class="ticker-badge">NSE: TCS</span>
+          <span class="ticker-badge">BSE: 532540</span>
+          <span class="tag tag-blue">Large Cap</span>
+        </div>
+        <div style="font-size:20px;font-weight:500;margin-bottom:3px">Tata Consultancy Services Ltd.</div>
+        <div style="font-size:13px;color:var(--color-text-secondary)">IT Services &amp; Consulting · Technology Sector · Founded 1968</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:22px;font-weight:500">₹2,200</div>
+        <div style="font-size:11px;color:var(--color-text-secondary)">~Jun 2026 (approx.)</div>
+        <div style="font-size:12px;margin-top:4px"><span class="tag tag-amber">Mkt Cap ≈ ₹7.5–11L Cr</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🏢 Company overview</div>
+    <ul>
+      <li>India's largest IT company and a global leader in IT services, consulting, and business process outsourcing</li>
+      <li>Subsidiary of Tata Group; serves 600+ clients across BFSI, Retail, Manufacturing, Life Sciences, Telecom, and more</li>
+      <li>Operations in 55+ countries; 600,000+ employees worldwide</li>
+      <li>Key verticals: BFSI (32%), Retail/CPG (15%), Life Sciences (10.5%), Manufacturing (8.8%)</li>
+      <li>ADRs also trade on NYSE; a global benchmark for IT outsourcing quality</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📊 Financial snapshot (FY2022–FY2026)</div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-label">Revenue (FY26 TTM)</div>
+        <div class="metric-value">$30B+</div>
+        <div class="metric-sub">₹2.55 Trillion INR</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Net profit (FY26)</div>
+        <div class="metric-value">₹485B</div>
+        <div class="metric-sub">Net margin ~19.8%</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">EBITDA margin</div>
+        <div class="metric-value">~27–28%</div>
+        <div class="metric-sub">Op. margin 25% FY26</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">EPS (TTM)</div>
+        <div class="metric-value">₹134</div>
+        <div class="metric-sub">Consistent grower</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Debt / Equity</div>
+        <div class="metric-value">~0%</div>
+        <div class="metric-sub">Virtually debt-free</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Free Cash Flow</div>
+        <div class="metric-value">₹462B</div>
+        <div class="metric-sub">OCF: 125% of net profit</div>
+      </div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem">
+      <div class="fin-row"><span class="fin-label">Revenue CAGR (5-yr)</span><span class="fin-value">~10.2% (INR)</span></div>
+      <div class="fin-row"><span class="fin-label">Net profit margin</span><span class="fin-value">~18–20% (stable)</span></div>
+      <div class="fin-row"><span class="fin-label">ROE</span><span class="fin-value">~54% (exceptional)</span></div>
+      <div class="fin-row"><span class="fin-label">ROCE</div><span class="fin-value">~62%</span></div>
+      <div class="fin-row"><span class="fin-label">Cash &amp; equivalents</span><span class="fin-value">₹487B (fortress balance sheet)</span></div>
+      <div class="fin-row"><span class="fin-label">FY26 op. margin</span><span class="fin-value">25% — 4-yr high</span></div>
+      <div class="fin-row"><span class="fin-label">FY26 net margin</span><span class="fin-value">19.8% — 4-yr high</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">💰 Valuation metrics</div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-label">P/E ratio</div>
+        <div class="metric-value">~15–22x</div>
+        <div class="metric-sub">41% below 10-yr median of 26.8x</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">P/B ratio</div>
+        <div class="metric-value">~14x</div>
+        <div class="metric-sub">Premium justified by ROE</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">EV/EBITDA</div>
+        <div class="metric-value">~17–18x</div>
+        <div class="metric-sub">Moderate for IT peer set</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Dividend yield</div>
+        <div class="metric-value">~3.9%</div>
+        <div class="metric-sub">₹11/share; payout ~64%</div>
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <span class="tag tag-green">Near 10-yr P/E low</span>
+      <span class="tag tag-amber">PEG ~4x (elevated)</span>
+      <span class="tag tag-blue">Fairly valued to slightly undervalued vs. history</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🏆 Business quality &amp; competitive moat</div>
+    <ul>
+      <li><strong>Brand &amp; trust:</strong> World's 2nd largest IT services brand ($21.3B+ brand value); clients span 56 years of relationships</li>
+      <li><strong>Scale moat:</strong> 600,000+ employees, global delivery model across 55+ countries</li>
+      <li><strong>Switching costs:</strong> Deep integration in client ERP, BFSI core systems, and digital infrastructure — very high stickiness</li>
+      <li><strong>Talent &amp; IP:</strong> Proprietary platforms: ignio (AI), TCS BaNCS (BFSI), TCS iON, TCS MasterCraft</li>
+      <li><strong>AI leadership:</strong> Annualized AI revenue crossed $2.3B in Q4FY26; ranked #1 in 4 of 25 analyst assessments</li>
+      <li><strong>TCV order book:</strong> $40.7B TCV in FY26 — one of the highest ever, indicating strong revenue visibility</li>
+      <li><strong>Tata Group halo:</strong> Unmatched trust, governance, and brand reputation in enterprise IT globally</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👔 Management analysis</div>
+    <ul>
+      <li><strong>CEO:</strong> K. Krithivasan (since 2023); veteran TCS insider with deep domain expertise in BFSI vertical</li>
+      <li><strong>COO:</strong> Aarthi Subramanian — driving AI-led transformation and deal momentum</li>
+      <li><strong>CFO:</strong> Samir Seksaria — disciplined capital allocator</li>
+      <li><strong>Promoter holding:</strong> 71.77–71.8% (Tata Sons) — extremely stable, no pledging</li>
+      <li><strong>Capital allocation:</strong> Regular + special dividends, share buybacks — strong history of returning cash</li>
+      <li><strong>Red flags:</strong> None significant. No pledged shares. Clean related-party transactions within Tata Group norms</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📈 Growth prospects</div>
+    <ul>
+      <li><strong>AI &amp; GenAI tailwind:</strong> Annualized AI revenue at $2.3B (FY26), growing rapidly; strategic HyperVault platform + OpenAI, AMD, ABB partnerships</li>
+      <li><strong>Cloud modernization:</strong> Mass enterprise migration from legacy to cloud — TCS positioned as preferred partner</li>
+      <li><strong>BFSI recovery:</strong> Post-rate-hike spending normalization; BFSI is TCS's biggest vertical (32%) and showing recovery signals</li>
+      <li><strong>Deal pipeline:</strong> $40.7B TCV in FY26 + 5 mega deals — strong multi-year revenue visibility</li>
+      <li><strong>Geographic expansion:</strong> Growth markets (India, Asia Pacific, Middle East) outperforming mature markets</li>
+      <li><strong>Near-term (1–2 yr):</strong> Recovery from discretionary spend slowdown; margin expansion as AI efficiency kicks in</li>
+      <li><strong>Long-term (3–5 yr):</strong> Enterprise AI adoption at scale; quantum computing; digital engineering; strong India opportunity</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚠️ Key risks</div>
+    <ul>
+      <li><strong>Revenue concentration:</strong> ~50% from North America; US macro slowdown or tariff-driven uncertainty directly impacts discretionary IT spend</li>
+      <li><strong>AI disruption:</strong> GenAI may automate entry-level IT work, compressing headcount-linked revenue and billing models</li>
+      <li><strong>Talent costs &amp; attrition:</strong> Wage inflation and attrition in key markets (US, Europe, India)</li>
+      <li><strong>Currency risk:</strong> INR appreciation vs USD/EUR erodes reported margins</li>
+      <li><strong>Competition:</strong> Infosys, Wipro, HCL, Accenture, Cognizant all competing for same wallet</li>
+      <li><strong>Slowdown in discretionary spend:</strong> Clients deferring large transformation projects in uncertain macro</li>
+      <li><strong>Regulation:</strong> US H-1B visa restrictions, UK immigration policy changes affect delivery model costs</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🏦 Ownership pattern (Mar 2026)</div>
+    <div class="ownership-bar">
+      <div class="own-seg" style="width:71.8%;background:#185FA5">71.8% Promoter</div>
+      <div class="own-seg" style="width:13.4%;background:#639922">13.4% DII</div>
+      <div class="own-seg" style="width:9.7%;background:#BA7517">9.7% FII</div>
+      <div class="own-seg" style="width:5.1%;background:#888780">5.1% Public</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;font-size:12px;color:var(--color-text-secondary)">
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#185FA5"></span>Tata Sons (Promoter) 71.8%</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#639922"></span>DII 13.4%</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#BA7517"></span>FII 9.7%</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#888780"></span>Retail/Public 5.1%</span>
+    </div>
+    <ul style="margin-top:10px">
+      <li>Promoter stake extremely stable at ~71.77–71.8% with no pledging whatsoever</li>
+      <li>DII holding has risen (from ~9% to 13.4%) indicating strong domestic fund confidence</li>
+      <li>FII holding at 9.7% — global investors monitor macro &amp; growth trajectory closely</li>
+      <li>Mutual fund holding: ~5.5–5.8% (slight recent decrease as markets rallied elsewhere)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Final verdict</div>
+    <div class="verdict-grid">
+      <div class="verdict-card bull">
+        <div class="verdict-label bull">🟢 Bull case</div>
+        <ul>
+          <li>AI revenue ramp ($2.3B+) is real and accelerating</li>
+          <li>$40.7B TCV ensures multi-year revenue visibility</li>
+          <li>Margins at 4-yr high with room to expand further</li>
+          <li>Fortress balance sheet, zero debt, superior FCF</li>
+          <li>Dividend yield ~4% provides downside cushion</li>
+          <li>P/E at 41% discount to 10-yr median = attractive entry</li>
+        </ul>
+      </div>
+      <div class="verdict-card bear">
+        <div class="verdict-label bear">🔴 Bear case</div>
+        <ul>
+          <li>Revenue growth moderated to ~5% — far from peak</li>
+          <li>US recession / geopolitical risk can slash IT budgets</li>
+          <li>AI may displace headcount, compressing growth model</li>
+          <li>PEG ratio of 4x signals growth-adjusted overvaluation</li>
+          <li>Currency headwinds from INR appreciation</li>
+          <li>Competition intensifying across all verticals</li>
+        </ul>
+      </div>
+    </div>
+    <div class="final-row">
+      <span class="final-pill tag-green">✅ Long-term investors</span>
+      <span class="final-pill tag-green">✅ Dividend seekers (~4% yield)</span>
+      <span class="final-pill tag-amber">⚠️ Moderate for traders (low volatility, β=0.83)</span>
+      <span class="final-pill tag-blue">Risk: Low–Medium</span>
+      <span class="final-pill tag-green">Outlook: Cautiously Positive</span>
+    </div>
+  </div>
+
+  <div class="disclaimer">⚠️ <strong>Disclaimer:</strong> This report is for educational and informational purposes only and does not constitute financial advice. Stock investments are subject to market risk. Please consult a SEBI-registered financial advisor before making any investment decisions.</div>
+</div>

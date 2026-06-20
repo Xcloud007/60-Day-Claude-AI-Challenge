@@ -1,0 +1,230 @@
+
+<h2 class="sr-only">Infosys fundamental research report with financial charts and key metrics</h2>
+
+<style>
+  .infy-report { font-family: var(--font-sans); color: var(--color-text-primary); padding: 0 0 2rem; }
+  .hero { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .hero-left h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
+  .hero-left p { font-size: 13px; color: var(--color-text-secondary); margin: 0; }
+  .badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: var(--border-radius-md); font-weight: 500; margin-right: 6px; }
+  .badge-blue { background: #E6F1FB; color: #0C447C; }
+  .badge-green { background: #EAF3DE; color: #27500A; }
+  .badge-amber { background: #FAEEDA; color: #633806; }
+  .hero-right { text-align: right; }
+  .hero-right .price { font-size: 28px; font-weight: 500; }
+  .hero-right .price-sub { font-size: 12px; color: var(--color-text-secondary); }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 1.5rem 0 0.75rem; border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 6px; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1rem; }
+  .metric-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.85rem 1rem; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .metric-value { font-size: 20px; font-weight: 500; }
+  .metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .chart-wrap { position: relative; width: 100%; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; font-size: 12px; color: var(--color-text-secondary); }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .ownership-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .own-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.85rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+  .own-label { font-size: 13px; color: var(--color-text-secondary); }
+  .own-value { font-size: 20px; font-weight: 500; }
+  .verdict-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .verdict-card { border-radius: var(--border-radius-md); padding: 1rem 1.1rem; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }
+  .verdict-card h3 { font-size: 13px; font-weight: 500; margin: 0 0 8px; color: var(--color-text-secondary); }
+  .verdict-card p { font-size: 13px; margin: 0; line-height: 1.5; color: var(--color-text-primary); }
+  .bull { border-left: 3px solid #639922; }
+  .bear { border-left: 3px solid #E24B4A; }
+  .neutral { border-left: 3px solid #BA7517; }
+  .risk-badge { display: inline-block; font-size: 12px; padding: 4px 14px; border-radius: var(--border-radius-md); font-weight: 500; }
+  .risk-medium { background: #FAEEDA; color: #633806; }
+  .risk-positive { background: #EAF3DE; color: #27500A; }
+  .risk-caution { background: #FAECE7; color: #712B13; }
+</style>
+
+<div class="infy-report">
+  <div class="hero">
+    <div class="hero-left">
+      <h1>Infosys Ltd (INFY)</h1>
+      <p>NSE · BSE · NYSE &nbsp;|&nbsp; IT Services &amp; Consulting &nbsp;|&nbsp; Large Cap</p>
+      <div style="margin-top: 8px;">
+        <span class="badge badge-blue">BSE: 500209</span>
+        <span class="badge badge-blue">NSE: INFY</span>
+        <span class="badge badge-green">NYSE: INFY</span>
+        <span class="badge badge-amber">Large Cap</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="price">₹1,041</div>
+      <div class="price-sub">as of Jun 20, 2026 &nbsp;|&nbsp; Mkt Cap ~₹4.3L Cr</div>
+      <div style="font-size: 12px; color: #E24B4A; margin-top: 2px;">▼ 30.7% YoY</div>
+    </div>
+  </div>
+
+  <div class="section-title">Key financial metrics (FY25)</div>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Revenue (USD)</div>
+      <div class="metric-value">$19.3B</div>
+      <div class="metric-sub">+3.9% YoY</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Net profit (INR)</div>
+      <div class="metric-value">₹26,248Cr</div>
+      <div class="metric-sub">Net margin ~16%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Operating margin</div>
+      <div class="metric-value">21.1%</div>
+      <div class="metric-sub">+0.5% YoY</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">EPS (INR)</div>
+      <div class="metric-value">₹64.50</div>
+      <div class="metric-sub">+1.8% YoY</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">ROE</div>
+      <div class="metric-value">30.4%</div>
+      <div class="metric-sub">Q1 FY26</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">FCF (FY25)</div>
+      <div class="metric-value">₹34,549Cr</div>
+      <div class="metric-sub">Record high; 129% conversion</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">P/E ratio</div>
+      <div class="metric-value">15.7x</div>
+      <div class="metric-sub">As of Jun 19, 2026</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Large deal TCV</div>
+      <div class="metric-value">$3.8B</div>
+      <div class="metric-sub">Q1 FY26; 55% net new</div>
+    </div>
+  </div>
+
+  <div class="section-title">Revenue trend (USD billion)</div>
+  <div class="legend">
+    <span><span class="legend-dot" style="background:#3266ad;"></span>Revenue ($B)</span>
+    <span><span class="legend-dot" style="background:#1D9E75;"></span>Operating margin (%)</span>
+  </div>
+  <div class="chart-wrap" style="height: 240px;">
+    <canvas id="revChart" role="img" aria-label="Infosys revenue in USD billions from FY21 to FY25: 13.6, 16.3, 18.2, 18.6, 19.3">Revenue trend FY21–FY25.</canvas>
+  </div>
+
+  <div class="section-title">Margin trend (%)</div>
+  <div class="legend">
+    <span><span class="legend-dot" style="background:#3266ad;"></span>Gross margin</span>
+    <span><span class="legend-dot" style="background:#1D9E75;"></span>Operating margin</span>
+    <span><span class="legend-dot" style="background:#BA7517;"></span>Net margin</span>
+  </div>
+  <div class="chart-wrap" style="height: 220px;">
+    <canvas id="marginChart" role="img" aria-label="Infosys margin trends FY21 to FY25">Gross, operating, net margin trends.</canvas>
+  </div>
+
+  <div class="section-title">Ownership pattern (Mar 2026)</div>
+  <div class="ownership-grid">
+    <div class="own-card"><span class="own-label">Promoters</span><span class="own-value">14.4%</span></div>
+    <div class="own-card"><span class="own-label">FII / FPI</span><span class="own-value">28.4%</span></div>
+    <div class="own-card"><span class="own-label">DII (incl. MFs)</span><span class="own-value">43.4%</span></div>
+    <div class="own-card"><span class="own-label">Public / Retail</span><span class="own-value">13.5%</span></div>
+  </div>
+
+  <div class="section-title">Investment verdict</div>
+  <div class="verdict-grid">
+    <div class="verdict-card bull">
+      <h3>Bull case</h3>
+      <p>AI-led services boom, strong deal pipeline ($3.8B TCV), record FCF, expanding margins via Project Maximus, Anthropic partnership for regulated AI, ROE above 30%, attractive valuation at 15–16x P/E.</p>
+    </div>
+    <div class="verdict-card bear">
+      <h3>Bear case</h3>
+      <p>Low single-digit revenue growth (3–4% CC), threat of AI disrupting traditional IT services, macro headwinds in US/Europe, visa policy risks, rising competition from TCS, Wipro, Accenture, and new AI-native firms.</p>
+    </div>
+    <div class="verdict-card neutral">
+      <h3>Suitable for</h3>
+      <p>Long-term investors and dividend seekers. Not ideal for short-term traders. FY26 guidance of 3–3.5% CC growth signals stability, not explosive returns.</p>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 10px; margin-top: 1rem; flex-wrap: wrap;">
+    <div>
+      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">Risk rating</div>
+      <span class="risk-badge risk-medium">Medium</span>
+    </div>
+    <div>
+      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">Overall outlook</div>
+      <span class="risk-badge risk-positive">Cautiously Positive</span>
+    </div>
+    <div>
+      <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">Valuation</div>
+      <span class="risk-badge risk-positive">Undervalued vs history</span>
+    </div>
+  </div>
+
+  <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 1.5rem; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 10px;">
+    ⚠ For educational purposes only. Not financial advice. Please consult a registered advisor before investing.
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const textColor = isDark ? '#b4b2a9' : '#5f5e5a';
+const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+
+new Chart(document.getElementById('revChart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY21','FY22','FY23','FY24','FY25'],
+    datasets: [
+      {
+        label: 'Revenue ($B)',
+        data: [13.6, 16.3, 18.2, 18.6, 19.3],
+        backgroundColor: '#378ADD',
+        borderRadius: 4,
+        yAxisID: 'y'
+      },
+      {
+        label: 'Op. Margin (%)',
+        data: [24.5, 23.0, 21.0, 20.6, 21.1],
+        type: 'line',
+        borderColor: '#1D9E75',
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        pointRadius: 4,
+        pointBackgroundColor: '#1D9E75',
+        tension: 0.3,
+        yAxisID: 'y2'
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { grid: { color: gridColor }, ticks: { color: textColor, callback: v => '$'+v+'B' } },
+      y2: { position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#1D9E75', callback: v => v+'%' }, min: 18, max: 27 }
+    }
+  }
+});
+
+new Chart(document.getElementById('marginChart'), {
+  type: 'line',
+  data: {
+    labels: ['FY21','FY22','FY23','FY24','FY25'],
+    datasets: [
+      { label: 'Gross margin', data: [29.5, 29.0, 27.0, 26.3, 26.3], borderColor: '#3266ad', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#3266ad', tension: 0.3 },
+      { label: 'Op. margin', data: [24.5, 23.0, 21.0, 20.6, 21.1], borderColor: '#1D9E75', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#1D9E75', tension: 0.3, borderDash: [5,3] },
+      { label: 'Net margin', data: [19.8, 18.6, 17.2, 16.7, 16.4], borderColor: '#BA7517', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#BA7517', tension: 0.3, borderDash: [2,3] }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { grid: { color: gridColor }, ticks: { color: textColor, callback: v => v+'%' }, min: 14, max: 32 },
+      x: { grid: { color: gridColor }, ticks: { color: textColor } }
+    }
+  }
+});
+</script>
