@@ -39,7 +39,7 @@ How should I approach eating healthier?
 > If you want, tell me a bit about your current eating habits, schedule, or what you're hoping to change (more energy, weight goals, just feeling better) and I can help you build something more tailored.
 
 **Usage after this response:**
-![Usage after Response A](screenshots/Usage-A.png)
+![Usage after Response A](Usage-A.png)
 
 ---
 
