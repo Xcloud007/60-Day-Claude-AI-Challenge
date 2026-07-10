@@ -39,7 +39,7 @@ How should I approach eating healthier?
 > If you want, tell me a bit about your current eating habits, schedule, or what you're hoping to change (more energy, weight goals, just feeling better) and I can help you build something more tailored.
 
 **Usage after this response:**
-![Usage after Response A](screenshots/usage-a.png)
+![Usage after Response A](screenshots/Usage-A.png)
 
 ---
 
@@ -80,7 +80,7 @@ You are a registered dietitian with 15 years of clinical experience. How should 
 > What's motivating the change right now — is there a particular goal or health concern you're working toward?
 
 **Usage after this response:**
-![Usage after Response B](screenshots/usage-b.png)
+![Usage after Response B](screenshots/Usage-B.png)
 
 ---
 
@@ -107,7 +107,7 @@ You are a blunt personal trainer who doesn't sugarcoat things. How should I appr
 > Where are you starting from right now — are you cooking most of your meals, eating out a lot, or somewhere in between? That'll shape what actually matters most for you first.
 
 **Usage after this response:**
-![Usage after Response C](screenshots/usage-c.png)
+![Usage after Response C](screenshots/Usage-C.png)
 
 ---
 
@@ -138,7 +138,7 @@ You are a friendly grandmother giving cooking advice. How should I approach eati
 > Now — is there a particular meal or ingredient you're trying to work with? Tell your grandmother what's in your kitchen and I'll help you make something good with it. 🥘
 
 **Usage after this response:**
-![Usage after Response D](screenshots/usage-d.png)
+![Usage after Response D](screenshots/Usage-D.png)
 
 ---
 
