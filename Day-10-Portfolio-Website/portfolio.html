@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rupesh | AI Enthusiast & Prompt Engineer</title>
+<meta name="description" content="Rupesh — AI Enthusiast, Prompt Engineer, building AI-powered tools with Claude AI through the 60-Day Claude Challenge." />
+<meta name="keywords" content="Rupesh, Prompt Engineer, Claude AI, AI Enthusiast, Portfolio, Context Engineering" />
+<meta name="author" content="Rupesh" />
+<meta property="og:title" content="Rupesh | AI Enthusiast & Prompt Engineer" />
+<meta property="og:description" content="AI-powered tools, dashboards and apps built with Claude AI and prompt engineering." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:," />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Poppins', 'ui-sans-serif', 'system-ui'] },
+        colors: {
+          purple: { DEFAULT: '#8B5CF6', dark: '#6D28D9' },
+          teal: { DEFAULT: '#14B8A6', dark: '#0F766E' },
+        },
+        animation: {
+          'fade-up': 'fadeUp 0.8s ease forwards',
+          'blink': 'blink 1s step-end infinite',
+          'float': 'float 6s ease-in-out infinite',
+        },
+        keyframes: {
+          fadeUp: { '0%': { opacity: 0, transform: 'translateY(30px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+          blink: { '50%': { opacity: 0 } },
+          float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
+        }
+      }
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Poppins', sans-serif; }
+  .gradient-text {
+    background: linear-gradient(90deg, #8B5CF6, #14B8A6);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .gradient-bg { background: linear-gradient(135deg, #8B5CF6, #14B8A6); }
+  .skill-bar-fill { width: 0%; transition: width 1.4s cubic-bezier(.4,0,.2,1); }
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+  .reveal.show { opacity: 1; transform: translateY(0); }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 10px; }
+  .nav-link.active { color: #14B8A6; }
+  .card-hover { transition: transform .35s ease, box-shadow .35s ease; }
+  .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -15px rgba(139,92,246,.35); }
+  #typed-cursor { animation: blink 1s step-end infinite; }
+</style>
+</head>
+<body class="bg-white dark:bg-[#0B0713] text-gray-800 dark:text-gray-200 transition-colors duration-500">
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/70 dark:bg-[#0B0713]/70 border-b border-gray-200 dark:border-white/10 transition-colors duration-500">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#hero" class="text-xl font-bold gradient-text">Rupesh<span class="text-gray-800 dark:text-white">.dev</span></a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#about" class="nav-link hover:text-teal transition">About</a>
+      <a href="#skills" class="nav-link hover:text-teal transition">Skills</a>
+      <a href="#projects" class="nav-link hover:text-teal transition">Projects</a>
+      <a href="#achievements" class="nav-link hover:text-teal transition">Achievements</a>
+      <a href="#contact" class="nav-link hover:text-teal transition">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 dark:bg-white/10 hover:scale-110 transition">
+        <svg id="icon-sun" class="w-5 h-5 hidden text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-9.9a1 1 0 010 1.414l-.707.707A1 1 0 1113.535 5.05l.707-.707a1 1 0 011.414 0zM17 9a1 1 0 100 2h1a1 1 0 100-2h-1zM4.222 5.222a1 1 0 011.414 0l.707.707A1 1 0 115.93 7.343l-.707-.707a1 1 0 010-1.414zM3 9a1 1 0 100 2H2a1 1 0 100-2h1zm2.222 8.778a1 1 0 001.414 0l.707-.707a1 1 0 10-1.414-1.414l-.707.707a1 1 0 000 1.414zM10 15a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"/></svg>
+        <svg id="icon-moon" class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+      </button>
+      <button id="menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden flex-col gap-4 px-6 pb-6 text-sm font-medium bg-white/95 dark:bg-[#0B0713]/95">
+    <a href="#about" class="nav-link py-1">About</a>
+    <a href="#skills" class="nav-link py-1">Skills</a>
+    <a href="#projects" class="nav-link py-1">Projects</a>
+    <a href="#achievements" class="nav-link py-1">Achievements</a>
+    <a href="#contact" class="nav-link py-1">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
+  <div class="absolute -top-32 -left-32 w-96 h-96 bg-purple/30 rounded-full blur-3xl animate-float"></div>
+  <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-teal/30 rounded-full blur-3xl animate-float" style="animation-delay:2s"></div>
+
+  <div class="relative max-w-4xl mx-auto text-center px-6">
+    <p class="reveal show text-teal font-semibold tracking-widest uppercase mb-4 text-sm">Welcome to my portfolio</p>
+    <h1 class="reveal show text-4xl sm:text-6xl font-extrabold mb-4">
+      Hi, I'm <span class="gradient-text">Rupesh</span>
+    </h1>
+    <h2 class="reveal show text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-300 h-16 sm:h-10">
+      <span id="typed-text"></span><span id="typed-cursor" class="text-purple">|</span>
+    </h2>
+    <p class="reveal show mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+      📍 Greater Noida, India — Building AI-powered tools with Claude AI & Prompt Engineering.
+    </p>
+
+    <div class="reveal show mt-8 flex flex-wrap justify-center gap-4">
+      <a href="#projects" class="px-6 py-3 rounded-full gradient-bg text-white font-semibold shadow-lg hover:scale-105 transition">View Projects</a>
+      <a href="#contact" class="px-6 py-3 rounded-full border border-purple text-purple dark:text-teal dark:border-teal font-semibold hover:bg-purple/10 transition">Contact Me</a>
+    </div>
+
+    <div class="reveal show mt-10 flex justify-center gap-5">
+      <a href="https://www.linkedin.com/in/rupesh-sharma-/" target="_blank" class="social-icon w-11 h-11 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center hover:bg-purple hover:text-white transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 11.02-4.12 2.06 2.06 0 01-.02 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="https://github.com/Xcloud007" target="_blank" class="social-icon w-11 h-11 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center hover:bg-teal hover:text-white transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18.91-.25 1.89-.38 2.86-.38.97 0 1.95.13 2.86.38 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.17 0 1.57-.01 2.83-.01 3.22 0 .31.21.67.8.56A10.52 10.52 0 0023.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg>
+      </a>
+      <a href="mailto:panoraworks@protonmail.com" class="social-icon w-11 h-11 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center hover:bg-purple hover:text-white transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </a>
+    </div>
+
+    <div class="reveal show mt-14 animate-bounce">
+      <svg class="w-6 h-6 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <p class="text-teal font-semibold uppercase tracking-widest text-sm mb-2">Get to know me</p>
+      <h2 class="text-3xl sm:text-4xl font-bold">About <span class="gradient-text">Me</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-10 items-center">
+      <div class="reveal md:col-span-2 flex justify-center">
+        <div class="relative w-56 h-56 sm:w-64 sm:h-64">
+          <div class="absolute inset-0 gradient-bg rounded-full blur-2xl opacity-40 animate-float"></div>
+          <div class="relative w-full h-full rounded-full gradient-bg flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
+            R
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal md:col-span-3">
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+          I am an AI enthusiast actively mastering Claude AI through the <span class="font-semibold text-purple dark:text-teal">60-Day Claude Challenge</span> by ABTalks. I build AI-powered tools, dashboards, and applications using prompt engineering and Claude Artifacts. Passionate about exploring how AI can solve real-world problems without traditional coding.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-gray-50 dark:bg-white/5 rounded-xl p-4 border border-gray-100 dark:border-white/10">
+            <p class="text-sm text-gray-400">Location</p>
+            <p class="font-semibold">Greater Noida, India</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-white/5 rounded-xl p-4 border border-gray-100 dark:border-white/10">
+            <p class="text-sm text-gray-400">Email</p>
+            <p class="font-semibold text-sm break-all">panoraworks@protonmail.com</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-white/5 rounded-xl p-4 border border-gray-100 dark:border-white/10">
+            <p class="text-sm text-gray-400">Focus</p>
+            <p class="font-semibold">Prompt Engineering</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-white/5 rounded-xl p-4 border border-gray-100 dark:border-white/10">
+            <p class="text-sm text-gray-400">Status</p>
+            <p class="font-semibold text-teal">60-Day Challenge 🔥</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="py-24 px-6 bg-gray-50 dark:bg-white/[0.02]">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <p class="text-teal font-semibold uppercase tracking-widest text-sm mb-2">What I bring</p>
+      <h2 class="text-3xl sm:text-4xl font-bold">My <span class="gradient-text">Skills</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 mb-16">
+      <div class="reveal space-y-6" id="skill-bars">
+        <div>
+          <div class="flex justify-between mb-1 text-sm font-medium"><span>Prompt Engineering</span><span>95%</span></div>
+          <div class="w-full h-2.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill h-full gradient-bg rounded-full" data-width="95"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1 text-sm font-medium"><span>Claude AI & Artifacts</span><span>92%</span></div>
+          <div class="w-full h-2.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill h-full gradient-bg rounded-full" data-width="92"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1 text-sm font-medium"><span>Context Engineering</span><span>88%</span></div>
+          <div class="w-full h-2.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill h-full gradient-bg rounded-full" data-width="88"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1 text-sm font-medium"><span>Chain-of-Thought Prompting</span><span>90%</span></div>
+          <div class="w-full h-2.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill h-full gradient-bg rounded-full" data-width="90"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1 text-sm font-medium"><span>HTML & AI Workflows</span><span>80%</span></div>
+          <div class="w-full h-2.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill h-full gradient-bg rounded-full" data-width="80"></div></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 class="font-semibold mb-4 text-lg">Tools I Use</h3>
+        <div class="flex flex-wrap gap-3 mb-8">
+          <span class="px-4 py-2 rounded-full bg-purple/10 text-purple dark:text-purple-300 text-sm font-medium border border-purple/30">Claude.ai</span>
+          <span class="px-4 py-2 rounded-full bg-teal/10 text-teal dark:text-teal-300 text-sm font-medium border border-teal/30">GitHub</span>
+          <span class="px-4 py-2 rounded-full bg-purple/10 text-purple dark:text-purple-300 text-sm font-medium border border-purple/30">Notion</span>
+          <span class="px-4 py-2 rounded-full bg-teal/10 text-teal dark:text-teal-300 text-sm font-medium border border-teal/30">NoteGPT</span>
+          <span class="px-4 py-2 rounded-full bg-purple/10 text-purple dark:text-purple-300 text-sm font-medium border border-purple/30">Sider AI</span>
+          <span class="px-4 py-2 rounded-full bg-teal/10 text-teal dark:text-teal-300 text-sm font-medium border border-teal/30">Capsule Hub</span>
+        </div>
+
+        <h3 class="font-semibold mb-4 text-lg">Soft Skills</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 rounded-full bg-gray-100 dark:bg-white/10 text-sm font-medium">Consistency</span>
+          <span class="px-4 py-2 rounded-full bg-gray-100 dark:bg-white/10 text-sm font-medium">Self-Learning</span>
+          <span class="px-4 py-2 rounded-full bg-gray-100 dark:bg-white/10 text-sm font-medium">Problem Solving</span>
+          <span class="px-4 py-2 rounded-full bg-gray-100 dark:bg-white/10 text-sm font-medium">Research</span>
+          <span class="px-4 py-2 rounded-full bg-gray-100 dark:bg-white/10 text-sm font-medium">Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <p class="text-teal font-semibold uppercase tracking-widest text-sm mb-2">My work</p>
+      <h2 class="text-3xl sm:text-4xl font-bold">Featured <span class="gradient-text">Projects</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="reveal card-hover bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
+        <div class="h-40 gradient-bg flex items-center justify-center text-white text-5xl">🌍</div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Environmental Health Analyzer</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">AI-powered AQI dashboard with interactive filters and health insights.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs px-3 py-1 rounded-full bg-purple/10 text-purple dark:text-purple-300">Claude Artifacts</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-teal/10 text-teal dark:text-teal-300">HTML</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-purple/10 text-purple dark:text-purple-300">Chart.js</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal card-hover bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
+        <div class="h-40 gradient-bg flex items-center justify-center text-white text-5xl">🥗</div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">NutriScope</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Personal nutrition tracking app with 60+ foods, meal planner and risk analysis.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs px-3 py-1 rounded-full bg-purple/10 text-purple dark:text-purple-300">Claude Artifacts</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-teal/10 text-teal dark:text-teal-300">HTML</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-purple/10 text-purple dark:text-purple-300">Tailwind CSS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal card-hover bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
+        <div class="h-40 gradient-bg flex items-center justify-center text-white text-5xl">📈</div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Stock Research Skill</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Reusable Claude skill for fundamental analysis of Indian and global stocks.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs px-3 py-1 rounded-full bg-purple/10 text-purple dark:text-purple-300">Claude Projects</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-teal/10 text-teal dark:text-teal-300">Prompt Engineering</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="py-24 px-6 bg-gray-50 dark:bg-white/[0.02]">
+  <div class="max-w-4xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <p class="text-teal font-semibold uppercase tracking-widest text-sm mb-2">Milestones</p>
+      <h2 class="text-3xl sm:text-4xl font-bold">Achievements & <span class="gradient-text">Certifications</span></h2>
+    </div>
+
+    <div class="space-y-6">
+      <div class="reveal flex gap-4 items-start bg-white dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-white/10">
+        <span class="text-2xl">🏆</span>
+        <p>Completing <span class="font-semibold">60-Day Claude AI Mastery Challenge</span> by ABTalks</p>
+      </div>
+      <div class="reveal flex gap-4 items-start bg-white dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-white/10">
+        <span class="text-2xl">🛠️</span>
+        <p>Built <span class="font-semibold">3+ AI-powered web applications</span> using Claude Artifacts</p>
+      </div>
+      <div class="reveal flex gap-4 items-start bg-white dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-white/10">
+        <span class="text-2xl">🧠</span>
+        <p>Mastered <span class="font-semibold">Chain-of-Thought & Context Engineering</span> techniques</p>
+      </div>
+      <div class="reveal flex gap-4 items-start bg-white dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-white/10">
+        <span class="text-2xl">⚙️</span>
+        <p>Created reusable <span class="font-semibold">Custom Skills</span> for stock research and career planning</p>
+      </div>
+      <div class="reveal flex gap-4 items-start bg-white dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-white/10">
+        <span class="text-2xl">✍️</span>
+        <p>Completed <span class="font-semibold">Content Writing Internship</span> at InAmgios Foundation</p>
+      </div>
+      <div class="reveal flex gap-4 items-start bg-white dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-white/10">
+        <span class="text-2xl">🎓</span>
+        <p>Completed <span class="font-semibold">Critical Thinking</span> course hosted by HP Life</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal text-center mb-14">
+      <p class="text-teal font-semibold uppercase tracking-widest text-sm mb-2">Let's talk</p>
+      <h2 class="text-3xl sm:text-4xl font-bold">Get In <span class="gradient-text">Touch</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="reveal space-y-5">
+        <p class="text-gray-500 dark:text-gray-400">Feel free to reach out for collaborations, opportunities, or just to say hi 👋</p>
+
+        <a href="mailto:panoraworks@protonmail.com" class="flex items-center gap-4 bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/10 hover:border-purple transition">
+          <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white">✉️</div>
+          <div>
+            <p class="text-sm text-gray-400">Email</p>
+            <p class="font-medium">panoraworks@protonmail.com</p>
+          </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/rupesh-sharma-/" target="_blank" class="flex items-center gap-4 bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/10 hover:border-purple transition">
+          <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white">in</div>
+          <div>
+            <p class="text-sm text-gray-400">LinkedIn</p>
+            <p class="font-medium">Rupesh Sharma</p>
+          </div>
+        </a>
+
+        <a href="https://github.com/Xcloud007" target="_blank" class="flex items-center gap-4 bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/10 hover:border-purple transition">
+          <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white">⌥</div>
+          <div>
+            <p class="text-sm text-gray-400">GitHub</p>
+            <p class="font-medium">Xcloud007</p>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-4 bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/10">
+          <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white">📍</div>
+          <div>
+            <p class="text-sm text-gray-400">Location</p>
+            <p class="font-medium">Greater Noida, India</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="contact-form" class="reveal space-y-4 bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10">
+        <div>
+          <label class="text-sm font-medium mb-1 block">Name</label>
+          <input required type="text" placeholder="Your name" class="w-full px-4 py-3 rounded-lg bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-purple" />
+        </div>
+        <div>
+          <label class="text-sm font-medium mb-1 block">Email</label>
+          <input required type="email" placeholder="you@example.com" class="w-full px-4 py-3 rounded-lg bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-purple" />
+        </div>
+        <div>
+          <label class="text-sm font-medium mb-1 block">Message</label>
+          <textarea required rows="4" placeholder="Say something..." class="w-full px-4 py-3 rounded-lg bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-purple"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3 rounded-lg gradient-bg text-white font-semibold hover:scale-[1.02] transition">Send Message</button>
+        <p id="form-success" class="hidden text-center text-teal font-medium">✅ Message ready! Opening your email client...</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="py-8 text-center text-sm text-gray-400 border-t border-gray-100 dark:border-white/10">
+  © 2026 Rupesh. 🚀
+</footer>
+
+<script>
+  // Theme toggle
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  const iconSun = document.getElementById('icon-sun');
+  const iconMoon = document.getElementById('icon-moon');
+
+  function setTheme(dark) {
+    html.classList.toggle('dark', dark);
+    iconSun.classList.toggle('hidden', !dark);
+    iconMoon.classList.toggle('hidden', dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setTheme(savedTheme ? savedTheme === 'dark' : prefersDark);
+  themeToggle.addEventListener('click', () => setTheme(!html.classList.contains('dark')));
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    mobileMenu.classList.remove('flex');
+  }));
+
+  // Typing animation
+  const phrases = ["AI Enthusiast", "Prompt Engineer", "60-Day Claude Challenge", "Claude Artifacts Builder"];
+  const typedEl = document.getElementById('typed-text');
+  let pIdx = 0, cIdx = 0, deleting = false;
+
+  function type() {
+    const current = phrases[pIdx];
+    if (!deleting) {
+      typedEl.textContent = current.slice(0, cIdx + 1);
+      cIdx++;
+      if (cIdx === current.length) { deleting = true; setTimeout(type, 1400); return; }
+    } else {
+      typedEl.textContent = current.slice(0, cIdx - 1);
+      cIdx--;
+      if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 40 : 80);
+  }
+  type();
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        if (entry.target.id === 'skill-bars') {
+          entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Active nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(sec => navObserver.observe(sec));
+
+  // Contact form -> mailto
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('form-success');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const inputs = form.querySelectorAll('input, textarea');
+    const name = inputs[0].value, email = inputs[1].value, message = inputs[2].value;
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    successMsg.classList.remove('hidden');
+    setTimeout(() => {
+      window.location.href = `mailto:panoraworks@protonmail.com?subject=${subject}&body=${body}`;
+    }, 800);
+  });
+</script>
+</body>
+</html>
