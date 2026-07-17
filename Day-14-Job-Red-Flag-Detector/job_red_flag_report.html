@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Red Flag Detector Report</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0f1115; color:#e6e6e6; margin:0; padding:24px; }
+  .wrap { max-width:900px; margin:0 auto; }
+  h1 { font-size:1.6rem; margin-bottom:4px; }
+  h2 { border-bottom:2px solid #333; padding-bottom:6px; margin-top:36px; color:#ffb454; }
+  h3 { color:#ff6b6b; }
+  .job-block { background:#171a21; border:1px solid #2a2e38; border-radius:10px; padding:20px; margin-top:20px; }
+  .score { font-size:2.4rem; font-weight:700; }
+  .score-bar { height:14px; border-radius:7px; background:#2a2e38; overflow:hidden; margin:8px 0 16px; }
+  .score-fill { height:100%; border-radius:7px; }
+  .high { background:#e74c3c; }
+  .med { background:#f39c12; }
+  .low { background:#2ecc71; }
+  table { width:100%; border-collapse:collapse; margin-top:10px; }
+  th, td { border:1px solid #2a2e38; padding:8px 10px; text-align:left; font-size:0.92rem; }
+  th { background:#1f232c; color:#ffb454; }
+  .sev { font-weight:700; }
+  .sev-high { color:#e74c3c; }
+  .sev-med { color:#f39c12; }
+  .sev-low { color:#2ecc71; }
+  ul { padding-left:20px; }
+  .verdict { display:inline-block; padding:6px 16px; border-radius:20px; font-weight:700; margin-top:6px; }
+  .avoid { background:#e74c3c22; color:#e74c3c; border:1px solid #e74c3c; }
+  .caution { background:#f39c1222; color:#f39c12; border:1px solid #f39c12; }
+  .apply { background:#2ecc7122; color:#2ecc71; border:1px solid #2ecc71; }
+  .questions li { margin-bottom:6px; }
+  .positive { color:#2ecc71; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🚩 AI Red Flag Detector — Job Analysis Report</h1>
+<p style="color:#999;">Automated screening of job postings for unrealistic demands, toxicity signals, and hiring risk.</p>
+
+<!-- JOB 1 -->
+<div class="job-block">
+<h2>Job 1: Junior Full Stack Developer</h2>
+
+<div class="score">88<span style="font-size:1rem;color:#999;">/100</span></div>
+<div class="score-bar"><div class="score-fill high" style="width:88%;"></div></div>
+
+<h3>Top Red Flags</h3>
+<table>
+<tr><th>Flag</th><th>Severity</th></tr>
+<tr><td>"Junior" role demanding 5+ years experience — contradictory leveling</td><td class="sev sev-high">9</td></tr>
+<tr><td>Impossible tech stack breadth (3 frontend frameworks, 3 cloud providers, K8s, AI/ML) for one role</td><td class="sev sev-high">9</td></tr>
+<tr><td>Junior expected to lead client meetings, mentor others, own architecture</td><td class="sev sev-high">8</td></tr>
+<tr><td>24/7 support expectation — burnout risk</td><td class="sev sev-high">9</td></tr>
+<tr><td>"Work hard play hard" / "thrive under pressure" — classic toxic-culture language</td><td class="sev sev-med">7</td></tr>
+<tr><td>No salary disclosed</td><td class="sev sev-med">6</td></tr>
+<tr><td>"Remote" but relocation to Bengaluru may be required — authenticity concern</td><td class="sev sev-med">7</td></tr>
+<tr><td>Company is 8 months old, unfunded, 12 people, rapid hiring — high instability risk</td><td class="sev sev-high">8</td></tr>
+<tr><td>Reviews mention long hours already</td><td class="sev sev-med">7</td></tr>
+</table>
+
+<h3>Positive Signals</h3>
+<ul class="positive">
+<li>Role does specify concrete technical domains (at least it's not vague about tech)</li>
+<li>Small team could mean faster growth/learning exposure if the company survives</li>
+</ul>
+
+<h3>Risk Breakdown</h3>
+<table>
+<tr><th>Category</th><th>Risk Level</th><th>Notes</th></tr>
+<tr><td>Unrealistic Requirements</td><td class="sev sev-high">Very High</td><td>Senior-level ask under a "Junior" title; unattainable stack</td></tr>
+<tr><td>Toxic Workplace Signals</td><td class="sev sev-high">High</td><td>24/7 support, pressure-culture buzzwords, existing negative reviews</td></tr>
+<tr><td>Remote Authenticity</td><td class="sev sev-med">Medium</td><td>"Remote" undercut by relocation clause</td></tr>
+<tr><td>Hiring Risk</td><td class="sev sev-high">High</td><td>Rapid hiring phase + no salary disclosure = possible churn mill</td></tr>
+<tr><td>Company Risk</td><td class="sev sev-high">High</td><td>8-month-old startup, no funding, tiny team, unproven survival</td></tr>
+</table>
+
+<h3>Final Verdict</h3>
+<span class="verdict avoid">⚠️ AVOID (unless desperate / willing to negotiate heavily)</span>
+
+<h3>5 Smart Interview Questions</h3>
+<ul class="questions">
+<li>Since this is titled "Junior," which of the listed technologies will I actually use in the first 6 months, and which are aspirational for later?</li>
+<li>What does "24/7 support" mean in practice — is there an on-call rotation, and is it compensated?</li>
+<li>Can you walk me through the company's current funding/runway situation?</li>
+<li>Is the "remote" arrangement fully remote long-term, or should I expect mandatory relocation to Bengaluru within a defined timeframe?</li>
+<li>What is the average tenure of engineers currently on the team, and why did the last person in this role leave?</li>
+</ul>
+</div>
+
+<!-- JOB 2 -->
+<div class="job-block">
+<h2>Job 2: Marketing Executive</h2>
+
+<div class="score">82<span style="font-size:1rem;color:#999;">/100</span></div>
+<div class="score-bar"><div class="score-fill high" style="width:82%;"></div></div>
+
+<h3>Top Red Flags</h3>
+<table>
+<tr><th>Flag</th><th>Severity</th></tr>
+<tr><td>Entry-level (0-2 yrs) expected to cover 8+ distinct disciplines (social, ads, design, video, events, PR, writing, sales)</td><td class="sev sev-high">9</td></tr>
+<tr><td>"Available whenever required" — no work-hour boundaries</td><td class="sev sev-high">9</td></tr>
+<tr><td>"Aggressive growth targets" for a junior hire — pressure mismatch</td><td class="sev sev-high">8</td></tr>
+<tr><td>"Competitive salary" with no figure — common vague-comp red flag</td><td class="sev sev-med">6</td></tr>
+<tr><td>"Remote-first" but quarterly travel/relocation required — authenticity issue</td><td class="sev sev-med">7</td></tr>
+<tr><td>High employee turnover reported</td><td class="sev sev-high">8</td></tr>
+<tr><td>Reviews cite unrealistic targets already</td><td class="sev sev-high">8</td></tr>
+<tr><td>Multiple open roles simultaneously — possible revolving-door hiring</td><td class="sev sev-med">7</td></tr>
+</table>
+
+<h3>Positive Signals</h3>
+<ul class="positive">
+<li>Low experience bar (0-2 yrs) may suit early-career applicants seeking exposure</li>
+<li>Broad responsibilities could build a diverse skill portfolio quickly, if paced sustainably</li>
+</ul>
+
+<h3>Risk Breakdown</h3>
+<table>
+<tr><th>Category</th><th>Risk Level</th><th>Notes</th></tr>
+<tr><td>Unrealistic Requirements</td><td class="sev sev-high">Very High</td><td>One person covering a full marketing department's scope</td></tr>
+<tr><td>Toxic Workplace Signals</td><td class="sev sev-high">High</td><td>Always-available expectation + aggressive targets + confirmed turnover</td></tr>
+<tr><td>Remote Authenticity</td><td class="sev sev-med">Medium</td><td>Travel/relocation clause undercuts "remote-first" claim</td></tr>
+<tr><td>Hiring Risk</td><td class="sev sev-high">High</td><td>Multiple simultaneous openings suggest constant backfilling</td></tr>
+<tr><td>Company Risk</td><td class="sev sev-med">Medium-High</td><td>Turnover + undisclosed pay signal management/retention issues</td></tr>
+</table>
+
+<h3>Final Verdict</h3>
+<span class="verdict avoid">⚠️ AVOID (high burnout risk for an entry-level role)</span>
+
+<h3>5 Smart Interview Questions</h3>
+<ul class="questions">
+<li>Realistically, how many hours per week does this role require, and is "always available" measured in any way?</li>
+<li>What specific, numeric targets define "aggressive growth," and what happens if they're missed?</li>
+<li>Can you share the salary range and how it compares to the local market?</li>
+<li>Why are multiple positions open at the same time — is this new-team growth or backfilling departures?</li>
+<li>What does the quarterly travel/relocation actually involve, and who covers the cost?</li>
+</ul>
+</div>
+
+<h2>Summary</h2>
+<p>Both postings show classic overload-and-underpay patterns: entry/junior titles paired with senior-level, multi-discipline demands, vague or undisclosed pay, blurred "remote" claims, and independently corroborated negative culture signals (long hours, turnover, unrealistic targets). Proceed only with direct, specific clarifying questions before accepting an offer.</p>
+
+</div>
+</body>
+</html>
