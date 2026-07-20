@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E85 Fuel Economics Dashboard — Chevrolet Enjoy</title>
+<style>
+  :root{
+    --navy:#0a0f1e; --panel:rgba(255,255,255,0.045); --border:rgba(255,255,255,0.09);
+    --e85:#f5a623; --petrol:#3b82f6; --diesel:#9aa2b1; --cng:#22c55e; --ev:#a855f7;
+    --text:#e6e9f2; --sub:#8a93a8; --good:#22c55e; --bad:#ef4444;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 10%, rgba(245,166,35,0.08), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(59,130,246,0.08), transparent 40%),
+      var(--navy);
+    color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; padding:28px; min-height:100vh;
+  }
+  h1{font-size:1.6rem; font-weight:700; letter-spacing:.3px;}
+  .sub{color:var(--sub); font-size:.85rem; margin-top:4px;}
+  .badge-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;}
+  .badge{background:var(--panel); border:1px solid var(--border); backdrop-filter:blur(10px);
+    padding:6px 12px; border-radius:20px; font-size:.75rem; color:var(--sub);}
+  .badge b{color:var(--text);}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:22px;}
+  .card{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px;
+    backdrop-filter:blur(14px); box-shadow:0 8px 24px rgba(0,0,0,0.25); position:relative; overflow:hidden;}
+  .card::before{content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:var(--accent,#f5a623);}
+  .card h3{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--sub); font-weight:600;}
+  .card .val{font-size:1.7rem; font-weight:700; margin-top:6px;}
+  .card .foot{font-size:.72rem; color:var(--sub); margin-top:4px;}
+  section{margin-top:30px;}
+  section h2{font-size:1.05rem; margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+  section h2::before{content:''; width:4px; height:16px; background:var(--e85); border-radius:2px;}
+  .panel{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:22px;
+    backdrop-filter:blur(14px);}
+  .flex2{display:grid; grid-template-columns:1.3fr 1fr; gap:16px;}
+  @media(max-width:900px){.flex2{grid-template-columns:1fr;}}
+  .legend{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:10px; font-size:.75rem; color:var(--sub);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
+  table{width:100%; border-collapse:collapse; font-size:.82rem;}
+  th,td{padding:9px 10px; text-align:left; border-bottom:1px solid var(--border);}
+  th{color:var(--sub); font-weight:600; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em;}
+  tr.hl{outline:1px solid var(--e85); background:rgba(245,166,35,0.08);}
+  .tag{padding:2px 8px; border-radius:10px; font-size:.68rem; font-weight:600;}
+  .score-wrap{display:flex; align-items:center; gap:24px; flex-wrap:wrap;}
+  .score-ring{position:relative; width:150px; height:150px; flex:none;}
+  .score-num{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .score-num b{font-size:2.1rem;}
+  .score-num span{font-size:.7rem; color:var(--sub);}
+  .breakdown{flex:1; min-width:220px;}
+  .bd-row{display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:.8rem;}
+  .bd-label{width:90px; color:var(--sub);}
+  .bd-bar-bg{flex:1; height:8px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden;}
+  .bd-bar{height:100%; border-radius:4px; background:var(--e85);}
+  .bd-val{width:70px; text-align:right; font-variant-numeric:tabular-nums;}
+  .paradox-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  @media(max-width:700px){.paradox-grid{grid-template-columns:1fr;}}
+  .pcard{border-radius:14px; padding:16px; border:1px solid var(--border);}
+  .pcard h4{font-size:.72rem; color:var(--sub); text-transform:uppercase; letter-spacing:.05em;}
+  .pcard .pv{font-size:1.6rem; font-weight:700; margin-top:6px;}
+  .pcard.good{background:rgba(34,197,94,0.08);} .pcard.bad{background:rgba(239,68,68,0.08);}
+  .pcard.neutral{background:rgba(245,166,35,0.08);}
+  footer{margin-top:30px; text-align:center; color:var(--sub); font-size:.72rem;}
+  svg text{font-family:inherit;}
+  .axis{fill:var(--sub); font-size:10px;}
+  .barlabel{fill:var(--text); font-size:10px; font-weight:600;}
+</style>
+</head>
+<body>
+
+<h1>⛽ E85 Fuel Economics Dashboard</h1>
+<div class="sub">Vehicle context: Chevrolet Enjoy · Diesel · Mixed usage · 1,000 km/month · 10-yr-old car — benchmarked against dataset fleet</div>
+<div class="badge-row" id="badgeRow"></div>
+
+<div class="grid" id="kpiGrid"></div>
+
+<section>
+  <h2>Cost / CO₂ / Maintenance per km — by Fuel Type</h2>
+  <div class="panel">
+    <div class="legend" id="legend"></div>
+    <svg id="chartFuel" viewBox="0 0 900 320" width="100%"></svg>
+  </div>
+</section>
+
+<section>
+  <h2>Vehicle Age Buckets — Cost & Maintenance per km</h2>
+  <div class="panel">
+    <svg id="chartAge" viewBox="0 0 900 300" width="100%"></svg>
+    <table style="margin-top:14px">
+      <thead><tr><th>Bucket</th><th>Sample n</th><th>Avg Cost/km</th><th>Avg Maint/km</th></tr></thead>
+      <tbody id="ageTable"></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>The E85 Paradox</h2>
+  <div class="panel">
+    <div class="paradox-grid" id="paradoxGrid"></div>
+  </div>
+</section>
+
+<section>
+  <h2>E85 Score</h2>
+  <div class="panel score-wrap">
+    <div class="score-ring">
+      <svg viewBox="0 0 150 150" width="150" height="150">
+        <circle cx="75" cy="75" r="62" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="14"/>
+        <circle id="scoreArc" cx="75" cy="75" r="62" fill="none" stroke="#f5a623" stroke-width="14"
+          stroke-linecap="round" transform="rotate(-90 75 75)"/>
+      </svg>
+      <div class="score-num"><b id="scoreBig">-</b><span>out of 10</span></div>
+    </div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+</section>
+
+<footer>Day 17 · E85 Dataset Analysis · n = 52 vehicle records across 5 fuel types</footer>
+
+<script>
+const DATA = {
+  "CNG":            {cpkm:3.3248, co2pkm:0.1253, maintpkm:0.6616, refuel:8.0,  price:80.0,  mileage:24.11,   n:10},
+  "Diesel":         {cpkm:4.6742, co2pkm:0.1787, maintpkm:1.0046, refuel:5.0,  price:91.0,  mileage:19.5778, n:9},
+  "E85 (Flex-Fuel)":{cpkm:6.3742, co2pkm:0.0698, maintpkm:0.4597, refuel:5.0,  price:82.0,  mileage:12.8727, n:11},
+  "Electric (EV)":  {cpkm:1.752,  co2pkm:0.0912, maintpkm:0.2331, refuel:45.0, price:12.0,  mileage:6.8545,  n:11},
+  "Petrol (E20)":   {cpkm:6.1543, co2pkm:0.1706, maintpkm:0.4661, refuel:5.0,  price:100.0, mileage:16.2727, n:11}
+};
+const AGE = {
+  "New(0-2y)":      {n:17, cpkm:4.227, maintpkm:0.347},
+  "Mid-life(3-5y)": {n:19, cpkm:4.085, maintpkm:0.558},
+  "Aged(6-9y)":     {n:14, cpkm:5.167, maintpkm:0.648},
+  "Old(10+y)":      {n:2,  cpkm:5.290, maintpkm:1.410}
+};
+const COLOR = {
+  "CNG":"var(--cng)", "Diesel":"var(--diesel)", "E85 (Flex-Fuel)":"var(--e85)",
+  "Electric (EV)":"var(--ev)", "Petrol (E20)":"var(--petrol)"
+};
+const COLOR_HEX = { "CNG":"#22c55e","Diesel":"#9aa2b1","E85 (Flex-Fuel)":"#f5a623","Electric (EV)":"#a855f7","Petrol (E20)":"#3b82f6" };
+
+// ---- Badges ----
+document.getElementById('badgeRow').innerHTML =
+  Object.entries(DATA).map(([k,v])=>`<div class="badge"><b>${k}</b> · n=${v.n}</div>`).join('');
+
+// ---- KPI cards (E85 focus vs Petrol baseline & Diesel = vehicle's own fuel) ----
+const e85 = DATA["E85 (Flex-Fuel)"], petrol = DATA["Petrol (E20)"], diesel = DATA["Diesel"];
+const pumpSaving = ((petrol.price - e85.price)/petrol.price*100);
+const runPenalty = ((e85.cpkm - petrol.cpkm)/petrol.cpkm*100);
+const breakEven = (e85.mileage/petrol.mileage)*petrol.price;
+
+const kpis = [
+  {t:"E85 Cost/km", v:"₹"+e85.cpkm.toFixed(2), f:"vs Petrol ₹"+petrol.cpkm.toFixed(2), c:"var(--e85)"},
+  {t:"E85 CO₂/km", v:e85.co2pkm.toFixed(3)+" kg", f:"lowest of all fuel types", c:"var(--e85)"},
+  {t:"Pump Price Saving", v:pumpSaving.toFixed(1)+"%", f:"E85 ₹"+e85.price+" vs Petrol ₹"+petrol.price, c:"var(--good)"},
+  {t:"Running Cost Penalty", v:"+"+runPenalty.toFixed(1)+"%", f:"E85 costs more per km to run", c:"var(--bad)"},
+  {t:"Diesel Cost/km (your car)", v:"₹"+diesel.cpkm.toFixed(2), f:"Chevrolet Enjoy baseline", c:"var(--diesel)"},
+];
+document.getElementById('kpiGrid').innerHTML = kpis.map(k=>
+  `<div class="card" style="--accent:${k.c}"><h3>${k.t}</h3><div class="val">${k.v}</div><div class="foot">${k.f}</div></div>`
+).join('');
+
+// ---- Legend ----
+document.getElementById('legend').innerHTML = Object.keys(DATA).map(k=>
+  `<span><i class="dot" style="background:${COLOR_HEX[k]}"></i>${k}</span>`).join('');
+
+// ---- Fuel comparison grouped bar chart (SVG) ----
+(function(){
+  const svg = document.getElementById('chartFuel');
+  const W=900,H=320, padL=50, padB=40, padT=20, groupGap=40;
+  const fuels = Object.keys(DATA);
+  const metrics = [
+    {key:'cpkm', label:'Cost/km (₹)', scale: v=>v},
+    {key:'co2pkm', label:'CO₂/km (kg)', scale: v=>v*10},
+    {key:'maintpkm', label:'Maint/km (₹)', scale: v=>v}
+  ];
+  const maxVal = Math.max(...fuels.map(f=>Math.max(DATA[f].cpkm, DATA[f].co2pkm*10, DATA[f].maintpkm)))*1.15;
+  const chartW = W - padL - 20, chartH = H - padT - padB;
+  const groupW = chartW/fuels.length;
+  let svgContent = '';
+  // gridlines
+  for(let i=0;i<=4;i++){
+    const y = padT + chartH - (chartH*i/4);
+    svgContent += `<line x1="${padL}" y1="${y}" x2="${W-20}" y2="${y}" stroke="rgba(255,255,255,0.06)"/>`;
+    svgContent += `<text x="${padL-8}" y="${y+3}" text-anchor="end" class="axis">${(maxVal*i/4).toFixed(1)}</text>`;
+  }
+  fuels.forEach((f,gi)=>{
+    const gx = padL + gi*groupW;
+    const barW = (groupW-16)/3;
+    metrics.forEach((m,mi)=>{
+      const raw = DATA[f][m.key];
+      const val = m.scale(raw);
+      const bh = (val/maxVal)*chartH;
+      const bx = gx + 8 + mi*barW;
+      const by = padT + chartH - bh;
+      const opacity = mi===0?1:(mi===1?0.65:0.4);
+      svgContent += `<rect x="${bx}" y="${by}" width="${barW-3}" height="${bh}" fill="${COLOR_HEX[f]}" opacity="${opacity}" rx="3"/>`;
+    });
+    svgContent += `<text x="${gx+groupW/2-8}" y="${H-14}" text-anchor="middle" class="axis" transform="rotate(0)">${f.split(' ')[0]}</text>`;
+  });
+  svgContent += `<text x="8" y="16" class="axis">CO₂/km ×10 for scale</text>`;
+  svg.innerHTML = svgContent;
+})();
+
+// ---- Age bucket chart ----
+(function(){
+  const svg = document.getElementById('chartAge');
+  const W=900,H=300, padL=50, padB=40, padT=20;
+  const buckets = Object.keys(AGE);
+  const maxVal = Math.max(...buckets.map(b=>Math.max(AGE[b].cpkm, AGE[b].maintpkm)))*1.2;
+  const chartW = W-padL-20, chartH = H-padT-padB;
+  const groupW = chartW/buckets.length;
+  let s='';
+  for(let i=0;i<=4;i++){
+    const y = padT + chartH - (chartH*i/4);
+    s += `<line x1="${padL}" y1="${y}" x2="${W-20}" y2="${y}" stroke="rgba(255,255,255,0.06)"/>`;
+    s += `<text x="${padL-8}" y="${y+3}" text-anchor="end" class="axis">${(maxVal*i/4).toFixed(1)}</text>`;
+  }
+  buckets.forEach((b,gi)=>{
+    const gx = padL + gi*groupW;
+    const barW=(groupW-24)/2;
+    const isOld = b.startsWith('Old');
+    ['cpkm','maintpkm'].forEach((k,mi)=>{
+      const val = AGE[b][k];
+      const bh = (val/maxVal)*chartH;
+      const bx = gx+10+mi*barW;
+      const by = padT+chartH-bh;
+      const color = mi===0? (isOld? '#f5a623':'#3b82f6') : (isOld? '#ef4444':'#9aa2b1');
+      s += `<rect x="${bx}" y="${by}" width="${barW-4}" height="${bh}" fill="${color}" rx="3"/>`;
+      s += `<text x="${bx+(barW-4)/2}" y="${by-4}" text-anchor="middle" class="barlabel">${val.toFixed(2)}</text>`;
+    });
+    s += `<text x="${gx+groupW/2-10}" y="${H-16}" text-anchor="middle" class="axis">${b}${isOld?' ★10yr':''}</text>`;
+  });
+  s += `<text x="8" y="16" class="axis">■ Cost/km  ■ Maint/km (highlighted = your car's bucket)</text>`;
+  svg.innerHTML = s;
+})();
+
+// age table
+document.getElementById('ageTable').innerHTML = Object.entries(AGE).map(([b,v])=>{
+  const isOld = b.startsWith('Old');
+  return `<tr class="${isOld?'hl':''}"><td>${b} ${isOld?'<span class="tag" style="background:rgba(245,166,35,.2);color:#f5a623">YOUR CAR</span>':''}</td><td>${v.n}</td><td>₹${v.cpkm.toFixed(2)}</td><td>₹${v.maintpkm.toFixed(2)}</td></tr>`;
+}).join('');
+
+// ---- Paradox cards ----
+document.getElementById('paradoxGrid').innerHTML = `
+  <div class="pcard good"><h4>Pump Price Saving</h4><div class="pv" style="color:var(--good)">${pumpSaving.toFixed(1)}%</div><div class="foot">E85 is cheaper per litre at the pump (₹${e85.price} vs ₹${petrol.price})</div></div>
+  <div class="pcard bad"><h4>Running Cost Penalty</h4><div class="pv" style="color:var(--bad)">+${runPenalty.toFixed(1)}%</div><div class="foot">Lower mileage means E85 actually costs more per km to drive</div></div>
+  <div class="pcard neutral"><h4>Break-even Petrol Price</h4><div class="pv" style="color:var(--e85)">₹${breakEven.toFixed(1)}</div><div class="foot">Petrol would need to reach this price for E85 to match cost/km</div></div>
+`;
+
+// ---- Score calculation ----
+(function(){
+  const cpkms = Object.values(DATA).map(d=>d.cpkm);
+  const co2s = Object.values(DATA).map(d=>d.co2pkm);
+  const refuels = Object.values(DATA).map(d=>d.refuel);
+  const maints = Object.values(DATA).map(d=>d.maintpkm);
+  const bestCost = Math.min(...cpkms), bestCO2 = Math.min(...co2s), bestRefuel = Math.min(...refuels), bestMaint = Math.min(...maints);
+
+  const costScore = 4*(bestCost/e85.cpkm);
+  const co2Score = 3*(bestCO2/e85.co2pkm);
+  const refuelScore = 2*(bestRefuel/e85.refuel);
+  const maintScore = 1*(bestMaint/e85.maintpkm);
+  const total = costScore+co2Score+refuelScore+maintScore;
+
+  document.getElementById('scoreBig').textContent = total.toFixed(1);
+  const circumference = 2*Math.PI*62;
+  const arc = document.getElementById('scoreArc');
+  arc.setAttribute('stroke-dasharray', circumference);
+  arc.setAttribute('stroke-dashoffset', circumference*(1-total/10));
+
+  const rows = [
+    {label:'Cost (4pt)', val:costScore, max:4},
+    {label:'CO₂ (3pt)', val:co2Score, max:3},
+    {label:'Refuel (2pt)', val:refuelScore, max:2},
+    {label:'Maint (1pt)', val:maintScore, max:1}
+  ];
+  document.getElementById('breakdown').innerHTML = rows.map(r=>
+    `<div class="bd-row"><div class="bd-label">${r.label}</div>
+     <div class="bd-bar-bg"><div class="bd-bar" style="width:${Math.min(100,r.val/r.max*100)}%"></div></div>
+     <div class="bd-val">${r.val.toFixed(2)}/${r.max}</div></div>`
+  ).join('');
+})();
+</script>
+</body>
+</html>
