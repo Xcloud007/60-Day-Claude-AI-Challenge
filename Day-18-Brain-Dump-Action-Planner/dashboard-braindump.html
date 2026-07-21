@@ -1,0 +1,114 @@
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#12161f; --panel2:#171c28; --border:#242b3a;
+    --text:#e7eaf2; --sub:#8a91a6; --accent:#6c8cff;
+    --red:#ff5f6d; --orange:#ffb547; --green:#3ddc84; --purple:#b47bff;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;padding:20px;}
+  .wrap{max-width:1100px;margin:0 auto;}
+  h1{font-size:22px;margin:0 0 4px;}
+  .subtitle{color:var(--sub);font-size:13px;margin-bottom:22px;}
+  section{margin-bottom:22px;}
+  h2{font-size:14px;text-transform:uppercase;letter-spacing:0.6px;color:var(--sub);margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:800px){.grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.grid{grid-template-columns:1fr;}}
+  .kcard{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:13px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;color:var(--sub);font-weight:600;font-size:11px;text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--border);}
+  td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .badge{display:inline-block;font-size:11px;padding:3px 8px;border-radius:20px;white-space:nowrap;}
+  .b-high{background:rgba(255,95,109,0.15);color:var(--red);}
+  .b-med{background:rgba(255,181,71,0.15);color:var(--orange);}
+  .b-low{background:rgba(61,220,132,0.15);color:var(--green);}
+  .b-conflict{background:rgba(255,95,109,0.15);color:var(--red);}
+  .b-open{background:rgba(180,123,255,0.15);color:var(--purple);}
+  .b-pending{background:rgba(140,150,180,0.15);color:var(--sub);}
+  ul{margin:0;padding-left:18px;font-size:13px;line-height:1.9;}
+  .note{color:var(--sub);font-size:12px;font-style:italic;}
+</style>
+
+<div class="wrap">
+  <h1>Weekly Brain Dump — Action Plan</h1>
+  <div class="subtitle">Source: this week's brain dump note</div>
+
+  <section>
+    <h2>📋 Summary</h2>
+    <div class="card">
+      A single-source brain dump covering the 60-Day Claude Challenge (pending days, folder structure, LinkedIn posts, README, deployment), a skill-building goal (prompt engineering), a CRM research task, an internship inquiry, and a few tooling/verification checks.
+    </div>
+  </section>
+
+  <section>
+    <h2>⭐ Key Takeaways</h2>
+    <div class="grid">
+      <div class="kcard"><span class="badge b-high">🔴 High Priority</span><br><br>Streak healing deadline is this week</div>
+      <div class="kcard"><span class="badge b-high">🔴 High Priority</span><br><br>Finish all pending challenge days</div>
+      <div class="kcard"><span class="badge b-med">🟠 Medium Priority</span><br><br>Fix GitHub folder structure &amp; write better LinkedIn posts</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>✅ Action Items</h2>
+    <div class="card">
+      <table>
+        <tr><th>Task</th><th>Owner</th><th>Deadline</th><th>Status</th></tr>
+        <tr><td>Learn more about prompt engineering</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Finish all pending challenge days</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Fix GitHub folder structure</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Write better LinkedIn posts</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Deploy portfolio on Netlify or Vercel</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Ask about internships at AI companies</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Research CRM tools — Zoho or HubSpot</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Check if Claude counter extension is working</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Upload Day 16 stock reports properly</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Resolve Day 19 football workbook download question</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Streak healing</td><td>Not specified</td><td><span class="badge b-high">This week</span></td><td><span class="badge b-pending">⏳ Pending</span></td></tr>
+        <tr><td>Decide on combined README for all 60 days</td><td>Not specified</td><td>Not specified</td><td><span class="badge b-open">❓ Open Question</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>❓ Open Questions</h2>
+    <div class="card">
+      <ul>
+        <li><span class="badge b-open">❓</span> Which CRM tool to go with — Zoho or HubSpot?</li>
+        <li><span class="badge b-open">❓</span> Does the Day 19 football workbook need to be downloaded separately?</li>
+        <li><span class="badge b-open">❓</span> Should a combined README be made for all 60 days?</li>
+        <li><span class="badge b-open">❓</span> Deploy portfolio on Netlify or Vercel — not decided</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>⚠️ Risks / Blockers</h2>
+    <div class="card">
+      <ul>
+        <li><span class="badge b-high">🔴</span> Streak healing deadline is this week only</li>
+        <li><span class="badge b-med">🟠</span> Uncertainty on Day 19 football workbook download requirement could block that day's task</li>
+        <li><span class="badge b-med">🟠</span> Day 16 stock reports not yet uploaded properly</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>⚠️ Conflicts</h2>
+    <div class="card">
+      <span class="note">Not specified — no conflicting deadlines, owners, or information identified in this note.</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>🗒️ Additional Notes</h2>
+    <div class="card">
+      <ul>
+        <li>Deployment platform for portfolio still open between Netlify and Vercel.</li>
+        <li>Internship inquiry is scoped generally to "AI companies" — no specific companies named.</li>
+      </ul>
+    </div>
+  </section>
+</div>
