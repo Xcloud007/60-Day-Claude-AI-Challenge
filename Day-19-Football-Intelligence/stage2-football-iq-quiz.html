@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football IQ Quiz — Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch:#0B3D2E;
+    --grass:#1F7A4D;
+    --gold:#D4A72C;
+    --chalk:#F5F3EC;
+    --night:#0A0E0C;
+    --line: rgba(245,243,236,0.16);
+    --red:#C25B4A;
+    --green:#4FAE7D;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:radial-gradient(circle at 50% -10%, #123f2c 0%, var(--night) 65%);
+    color:var(--chalk);
+    font-family:'Inter',sans-serif;
+    padding-bottom:80px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  header{
+    text-align:center;
+    padding:64px 24px 40px;
+    border-bottom:2px solid var(--gold);
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-size:12px;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(34px,6vw,58px);
+    margin:0;
+    text-transform:uppercase;
+  }
+  .scoreboard{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin:56px auto 8px;
+    flex-wrap:wrap;
+  }
+  .score-block{text-align:center;}
+  .score-num{
+    font-family:'Space Mono',monospace;
+    font-size:64px;
+    font-weight:700;
+    color:var(--gold);
+    line-height:1;
+  }
+  .score-label{
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:#9fb8ac;
+    margin-top:6px;
+  }
+  .badge{
+    display:inline-block;
+    margin:28px auto 0;
+    padding:10px 22px;
+    border:1px solid var(--gold);
+    border-radius:100px;
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .badge-wrap{text-align:center;margin-bottom:20px;}
+  .section-label{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:56px 0 20px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:linear-gradient(180deg,#0F2E22,#0A1F17);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  th,td{
+    text-align:left;
+    padding:14px 16px;
+    font-size:14px;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-family:'Space Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:#9fb8ac;
+    background:rgba(255,255,255,.03);
+  }
+  tr:last-child td{border-bottom:none;}
+  .tag{
+    display:inline-block;
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    padding:3px 10px;
+    border-radius:100px;
+  }
+  .correct{background:rgba(79,174,125,.15);color:var(--green);border:1px solid rgba(79,174,125,.4);}
+  .wrong{background:rgba(194,91,74,.15);color:var(--red);border:1px solid rgba(194,91,74,.4);}
+  .insight-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-top:8px;
+  }
+  @media(max-width:600px){.insight-grid{grid-template-columns:1fr;}}
+  .insight-card{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:20px;
+    background:rgba(255,255,255,.02);
+  }
+  .insight-card h4{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    margin:0 0 8px;
+  }
+  .strong h4{color:var(--green);}
+  .weak h4{color:var(--red);}
+  .insight-card p{
+    font-size:13.5px;
+    line-height:1.6;
+    color:#d9d4c4;
+    margin:0;
+  }
+  footer{
+    text-align:center;
+    margin-top:70px;
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    color:#5f7268;
+    letter-spacing:.1em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Stage 2 · Football Intelligence Hub</div>
+  <h1>Football IQ Quiz</h1>
+</header>
+
+<div class="wrap">
+
+  <div class="scoreboard">
+    <div class="score-block">
+      <div class="score-num">4/5</div>
+      <div class="score-label">Questions Correct</div>
+    </div>
+    <div class="score-block">
+      <div class="score-num">78</div>
+      <div class="score-label">Awareness Score</div>
+    </div>
+  </div>
+  <div class="badge-wrap"><span class="badge">Football Follower</span></div>
+
+  <div class="section-label">Answer Breakdown</div>
+  <table>
+    <tr><th>#</th><th>Question</th><th>Your Answer</th><th>Result</th></tr>
+    <tr>
+      <td>1</td>
+      <td>Players per team on the field (Beginner)</td>
+      <td>12</td>
+      <td><span class="tag wrong">Wrong · Correct: 11</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>What a 1–1 scoreline means (Beginner)</td>
+      <td>A draw (tie)</td>
+      <td><span class="tag correct">Correct</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2022 World Cup winner (Intermediate)</td>
+      <td>Argentina</td>
+      <td><span class="tag correct">Correct</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>How teams advance from the group stage (Intermediate)</td>
+      <td>Top 2 per group</td>
+      <td><span class="tag correct">Correct</span></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Top recent goal-scorer in the data (Advanced)</td>
+      <td>Erling Haaland</td>
+      <td><span class="tag correct">Correct</span></td>
+    </tr>
+  </table>
+
+  <div class="section-label">Insights</div>
+  <div class="insight-grid">
+    <div class="insight-card strong">
+      <h4>Strongest area</h4>
+      <p>Tournament structure and reading current stats — you correctly identified group-stage rules and the top scorer straight from the data.</p>
+    </div>
+    <div class="insight-card weak">
+      <h4>Weakest area</h4>
+      <p>Core basic rules — the 11-vs-11 player count slipped, an easy fix with a little more exposure to the fundamentals.</p>
+    </div>
+  </div>
+  <div class="insight-card" style="margin-top:16px;">
+    <h4 style="color:var(--gold);">Key gap</h4>
+    <p>Basic match mechanics — fouls, offside, cards — haven't been tested yet. Worth brushing up on these even as your "meta" reading of the game keeps improving.</p>
+  </div>
+
+  <footer>Football Awareness Score derived from workbook categories · ABTalks World Cup Intelligence Master</footer>
+</div>
+
+</body>
+</html>

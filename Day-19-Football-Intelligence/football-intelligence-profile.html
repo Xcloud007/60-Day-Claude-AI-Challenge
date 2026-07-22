@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Intelligence Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch:#0B3D2E;
+    --grass:#1F7A4D;
+    --gold:#D4A72C;
+    --chalk:#F5F3EC;
+    --night:#0A0E0C;
+    --line: rgba(245,243,236,0.16);
+    --blue:#4A8FD9;
+    --red:#D9524A;
+    --green:#4FAE7D;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:radial-gradient(circle at 50% -10%, #123f2c 0%, var(--night) 60%);
+    color:var(--chalk);
+    font-family:'Inter',sans-serif;
+    padding-bottom:90px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+  header{
+    text-align:center;
+    padding:70px 24px 44px;
+    border-bottom:2px solid var(--gold);
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute;top:50%;left:50%;
+    width:380px;height:380px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-size:12px;
+    margin-bottom:18px;
+    position:relative;
+  }
+  h1{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(36px,7vw,66px);
+    margin:0;
+    text-transform:uppercase;
+    position:relative;
+  }
+  .id-card{
+    display:flex;
+    justify-content:center;
+    gap:36px;
+    flex-wrap:wrap;
+    margin:44px auto 0;
+    position:relative;
+  }
+  .id-tile{text-align:center;}
+  .id-num{
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:34px;
+    color:var(--gold);
+  }
+  .id-label{
+    font-size:10px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:#9fb8ac;
+    margin-top:4px;
+  }
+  .section{
+    margin:70px 0;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:24px;
+  }
+  .step-num{
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    color:var(--night);
+    background:var(--gold);
+    width:26px;height:26px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .section-title{
+    font-family:'Oswald',sans-serif;
+    font-size:24px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+  }
+  .card{
+    background:linear-gradient(180deg,#0F2E22,#0A1F17);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:24px 26px;
+  }
+  .predict-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  @media(max-width:640px){.predict-row{grid-template-columns:1fr;}}
+  .predict-tile{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:16px;
+    text-align:center;
+  }
+  .predict-role{
+    font-family:'Space Mono',monospace;
+    font-size:10px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:#9fb8ac;
+    margin-bottom:6px;
+  }
+  .predict-team{
+    font-family:'Oswald',sans-serif;
+    font-size:22px;
+    text-transform:uppercase;
+  }
+  .predict-conf{
+    font-family:'Space Mono',monospace;
+    color:var(--gold);
+    font-size:13px;
+    margin-top:4px;
+  }
+  .watch-list{
+    font-size:13.5px;
+    color:#c9c2ad;
+    margin-top:6px;
+  }
+  .quiz-summary{
+    display:flex;
+    gap:30px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .quiz-score{
+    font-family:'Space Mono',monospace;
+    font-size:44px;
+    font-weight:700;
+    color:var(--gold);
+    line-height:1;
+  }
+  .quiz-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#9fb8ac;margin-top:4px;}
+  .badge{
+    display:inline-block;
+    padding:8px 18px;
+    border:1px solid var(--gold);
+    border-radius:100px;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .strengths{
+    margin-top:20px;
+    font-size:13.5px;
+    color:#d9d4c4;
+    line-height:1.7;
+  }
+  .strengths b{color:var(--chalk);}
+  .versus-mini{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    margin-bottom:18px;
+  }
+  .vm-side{text-align:center;}
+  .vm-name{font-family:'Oswald',sans-serif;font-size:15px;text-transform:uppercase;}
+  .vm-pct{font-family:'Space Mono',monospace;font-size:36px;font-weight:700;}
+  .vm-side.m .vm-name, .vm-side.m .vm-pct{color:var(--blue);}
+  .vm-side.r .vm-name, .vm-side.r .vm-pct{color:var(--red);}
+  .vm-vs{font-family:'Space Mono',monospace;color:#9fb8ac;font-size:12px;}
+  .archetype-line{
+    text-align:center;
+    font-family:'Oswald',sans-serif;
+    font-size:26px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .archetype-desc{
+    font-size:13.5px;
+    color:#d9d4c4;
+    line-height:1.7;
+    text-align:center;
+    max-width:560px;
+    margin:0 auto 20px;
+  }
+  .recs-mini{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;
+  }
+  .rec-mini{
+    text-align:center;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:14px;
+  }
+  .rec-mini .role{
+    font-family:'Space Mono',monospace;
+    font-size:9.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .rec-mini .val{
+    font-family:'Oswald',sans-serif;
+    font-size:15px;
+    text-transform:uppercase;
+  }
+  .insight-card{
+    border:1px solid var(--gold);
+    border-radius:8px;
+    padding:30px;
+    background:linear-gradient(180deg,rgba(212,167,44,.08),transparent);
+  }
+  .insight-card .role{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:12px;
+  }
+  .insight-card p{
+    font-size:15px;
+    line-height:1.75;
+    color:#eee9d9;
+    margin:0;
+  }
+  footer{
+    text-align:center;
+    margin-top:80px;
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    color:#5f7268;
+    letter-spacing:.1em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Football Intelligence Hub</div>
+  <h1>Your Football<br>Intelligence Profile</h1>
+  <div class="id-card">
+    <div class="id-tile"><div class="id-num">78</div><div class="id-label">Awareness Score</div></div>
+    <div class="id-tile"><div class="id-num">76%</div><div class="id-label">Messi Match</div></div>
+    <div class="id-tile"><div class="id-num">CP</div><div class="id-label">Creative Playmaker</div></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="section">
+    <div class="section-head"><div class="step-num">1</div><div class="section-title">World Cup 2026 Prediction</div></div>
+    <div class="card">
+      <div class="predict-row">
+        <div class="predict-tile">
+          <div class="predict-role">Winner</div>
+          <div class="predict-team">Argentina</div>
+          <div class="predict-conf">78% confidence</div>
+        </div>
+        <div class="predict-tile">
+          <div class="predict-role">Runner-Up</div>
+          <div class="predict-team">Spain</div>
+          <div class="predict-conf">70% confidence</div>
+        </div>
+        <div class="predict-tile">
+          <div class="predict-role">Dark Horse</div>
+          <div class="predict-team">Morocco</div>
+          <div class="predict-conf">55% confidence</div>
+        </div>
+      </div>
+      <div class="watch-list"><b style="color:var(--chalk)">Players to watch:</b> Mbappé, Messi, Haaland, Bellingham</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="step-num">2</div><div class="section-title">Football Awareness Score</div></div>
+    <div class="card">
+      <div class="quiz-summary">
+        <div>
+          <div class="quiz-score">78/100</div>
+          <div class="quiz-label">4 of 5 correct</div>
+        </div>
+        <span class="badge">Football Follower</span>
+      </div>
+      <div class="strengths">
+        <b>Strength:</b> Reading tournament structure and current stats.<br>
+        <b>Growth area:</b> Core match rules — brush up on the basics (fouls, offside, cards).
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="step-num">3</div><div class="section-title">Messi vs Ronaldo Match</div></div>
+    <div class="card">
+      <div class="versus-mini">
+        <div class="vm-side m"><div class="vm-name">Messi</div><div class="vm-pct">76%</div></div>
+        <div class="vm-vs">VS</div>
+        <div class="vm-side r"><div class="vm-name">Ronaldo</div><div class="vm-pct">48%</div></div>
+      </div>
+      <div class="archetype-line">Creative Playmaker</div>
+      <div class="archetype-desc">You lead through ideas rather than volume, make calculated but instinctive decisions, and pair calm confidence with genuine ambition — closest in spirit to Messi's quiet, creative style.</div>
+      <div class="recs-mini">
+        <div class="rec-mini"><div class="role">Player</div><div class="val">Messi</div></div>
+        <div class="rec-mini"><div class="role">Club</div><div class="val">Barcelona</div></div>
+        <div class="rec-mini"><div class="role">Team</div><div class="val">Argentina</div></div>
+        <div class="rec-mini"><div class="role">Rivalry</div><div class="val">Messi–Ronaldo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="step-num">4</div><div class="section-title">Key Insight</div></div>
+    <div class="insight-card">
+      <div class="role">Summary</div>
+      <p>You came in knowing almost nothing, yet scored 4 out of 5 on the IQ quiz — your instincts for patterns in stats and tournament structure are sharper than your raw rules knowledge. That same instinct-driven style showed up again in the personality quiz: you think and lead like a playmaker, not a taskmaster. Watching a few Messi highlight matches would be the fastest way to deepen both your football knowledge and see your own decision-making style reflected on the pitch.</p>
+    </div>
+  </div>
+
+  <footer>Compiled from ABTalks World Cup Intelligence Master · Stages 1–3</footer>
+</div>
+
+</body>
+</html>
