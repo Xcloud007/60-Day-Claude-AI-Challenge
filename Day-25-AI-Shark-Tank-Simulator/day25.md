@@ -1,8 +1,5 @@
 # Day 25 — AI Shark Tank Simulator
 
-**Challenge:** 60-Day Claude AI Mastery Challenge by ABTalks
-**Task:** Build a complete AI Shark Tank Simulator as a single self-contained HTML file, pitch a startup idea to 4 AI judges, get scored, and receive an investment verdict.
-
 ## What I Built
 
 A single-file HTML app (no backend) with:
