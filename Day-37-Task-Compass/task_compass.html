@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Compass — Hospital / Healthcare</title>
+<style>
+  :root{
+    --bg1:#0b1220; --bg2:#111a2e; --card:#151f38cc; --card-b:#2a3a5e;
+    --accent:#31d0aa; --accent2:#5b8def; --warn:#f2a444; --danger:#ef5b6c;
+    --text:#e9edf5; --sub:#9db0d0;
+    --nurse:#31d0aa; --physician:#5b8def; --pharmacist:#c084fc; --lab:#f2a444;
+    --radiologist:#ef5b6c; --pcc:#38bdf8; --admin:#fbbf24; --it:#a3e635;
+    --frontdesk:#fb7185; --casemgr:#22d3ee;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 15% 10%, #16336655, transparent 40%),
+      radial-gradient(circle at 85% 20%, #2a1a4a55, transparent 40%),
+      radial-gradient(circle at 50% 90%, #0f2a2a55, transparent 45%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+    background-attachment:fixed;
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:960px; margin:0 auto;}
+  header.app{text-align:center; margin-bottom:22px;}
+  .logo{font-size:2.1rem; font-weight:800; letter-spacing:.5px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .subtitle{color:var(--sub); margin-top:4px; font-size:.95rem;}
+  .progress-wrap{max-width:640px; margin:22px auto 0; display:flex; gap:8px; align-items:center;}
+  .progress-track{flex:1; height:10px; border-radius:20px; background:#1c2942; overflow:hidden; border:1px solid var(--card-b);}
+  .progress-fill{height:100%; border-radius:20px; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width .5s ease;}
+  .progress-label{font-size:.78rem; color:var(--sub); white-space:nowrap;}
+  .stage-pill{display:inline-block; padding:5px 14px; border-radius:999px; font-size:.75rem; font-weight:700;
+    background:#1c2942; border:1px solid var(--card-b); color:var(--accent); letter-spacing:.5px; text-transform:uppercase;}
+
+  .card{
+    background:var(--card); border:1px solid var(--card-b); border-radius:18px; padding:22px;
+    backdrop-filter:blur(14px); box-shadow:0 10px 30px #00000055;
+    animation:fadeUp .45s ease;
+  }
+  @keyframes fadeUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+
+  .ticket{
+    background:linear-gradient(135deg,#1a2745,#0f172e); border:1px dashed #3a4b78; border-radius:14px;
+    padding:18px 20px; margin:18px 0 22px; position:relative; overflow:hidden;
+  }
+  .ticket::before{content:"🩺"; position:absolute; right:14px; top:10px; font-size:1.6rem; opacity:.25;}
+  .ticket-tag{font-size:.68rem; color:var(--accent); letter-spacing:1px; text-transform:uppercase; font-weight:700;}
+  .ticket-text{font-size:1.12rem; margin-top:6px; line-height:1.45;}
+
+  .role-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:14px;}
+  .role-card{
+    cursor:grab; user-select:none; padding:14px 10px; border-radius:14px; text-align:center;
+    background:#111a30; border:1px solid var(--role-color,var(--accent2));
+    box-shadow:0 0 0 1px #ffffff08 inset;
+    transition:transform .18s ease, box-shadow .18s ease;
+    position:relative;
+  }
+  .role-card:hover{transform:translateY(-4px) scale(1.03); box-shadow:0 8px 18px #00000066, 0 0 14px var(--role-color,var(--accent2))55;}
+  .role-card.dragging{opacity:.35;}
+  .role-card .emoji{font-size:1.6rem; display:block; margin-bottom:4px;}
+  .role-card .rname{font-size:.8rem; font-weight:600;}
+  .role-card.used{opacity:.3; pointer-events:none;}
+
+  .slot{
+    min-height:78px; border-radius:14px; border:2px dashed #3a4b78; display:flex; align-items:center; justify-content:center;
+    color:var(--sub); font-size:.85rem; transition:all .2s ease; padding:8px; text-align:center; position:relative;
+  }
+  .slot.highlight{border-color:var(--accent); box-shadow:0 0 0 3px #31d0aa22;}
+  .slot.filled{border-style:solid; border-color:var(--accent); background:#0f2a2a44; color:var(--text); font-weight:600;}
+  .slot.snap{animation:snap .35s ease;}
+  @keyframes snap{0%{transform:scale(.85);}60%{transform:scale(1.08);}100%{transform:scale(1);}}
+
+  .ownership-slot-wrap{margin:18px 0; text-align:center;}
+  .ownership-slot-wrap .label{font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; font-weight:700;}
+  .ownership-slot{max-width:280px; margin:0 auto;}
+
+  .route-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:18px 0;}
+  .route-slot{flex:1; min-width:110px;}
+  .arrow{color:var(--accent2); font-size:1.3rem;}
+
+  .collab-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0;}
+  .collab-grid .slot{min-height:100px;}
+  @media(max-width:640px){.collab-grid{grid-template-columns:repeat(2,1fr);}}
+
+  button{
+    font-family:inherit; cursor:pointer; border:none; border-radius:12px; padding:12px 22px; font-weight:700;
+    font-size:.9rem; letter-spacing:.3px; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  button.primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#04121a;}
+  button.primary:hover:not(:disabled){transform:translateY(-2px); box-shadow:0 8px 18px #31d0aa33;}
+  button.primary:disabled{opacity:.35; cursor:not-allowed;}
+  button.ghost{background:transparent; border:1px solid var(--card-b); color:var(--text);}
+  button.ghost:hover{border-color:var(--accent);}
+  .actions{display:flex; justify-content:flex-end; gap:10px; margin-top:8px;}
+
+  .reveal{margin-top:20px; padding:16px 18px; border-radius:14px; background:#0f1c33; border:1px solid var(--card-b); animation:fadeUp .4s ease;}
+  .reveal h4{margin:0 0 6px; font-size:.95rem; color:var(--accent);}
+  .reveal p{margin:4px 0; font-size:.9rem; color:var(--text); line-height:1.5;}
+  .reveal .why{color:var(--sub);}
+  .assist-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
+  .assist-tags span{background:#1c2942; padding:4px 10px; border-radius:999px; font-size:.75rem; border:1px solid var(--card-b);}
+
+  .flow-anim{display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin:14px 0;}
+  .flow-chip{padding:8px 12px; border-radius:10px; background:#111a30; border:1px solid var(--accent2); font-size:.82rem; opacity:0; transform:translateX(-10px); animation:flowIn .4s ease forwards;}
+  .flow-chip .em{margin-right:5px;}
+
+  @keyframes flowIn{to{opacity:1; transform:translateX(0);}}
+
+  .final-wrap{text-align:center;}
+  .confetti{font-size:2.4rem; margin-bottom:6px;}
+  .radar-wrap{display:flex; justify-content:center; margin:20px 0;}
+  .bars{display:flex; flex-direction:column; gap:14px; max-width:520px; margin:22px auto;}
+  .bar-row{text-align:left;}
+  .bar-row .barlabel{display:flex; justify-content:space-between; font-size:.85rem; margin-bottom:5px;}
+  .bar-track{height:12px; border-radius:20px; background:#1c2942; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:20px; width:0%; transition:width 1s ease;}
+  .reflection{text-align:left; margin-top:24px;}
+  .reflection .block{background:#0f1c33; border:1px solid var(--card-b); border-radius:14px; padding:14px 16px; margin-bottom:12px;}
+  .reflection .block h5{margin:0 0 6px; font-size:.85rem; color:var(--accent); text-transform:uppercase; letter-spacing:.5px;}
+  .reflection .block p{margin:0; font-size:.9rem; color:var(--text); line-height:1.5;}
+  .insight{font-style:italic; color:var(--sub); margin-top:18px; font-size:.92rem;}
+
+  .intro-btn-row{display:flex; justify-content:center; margin-top:18px;}
+  .hint{font-size:.78rem; color:var(--sub); margin-top:8px; text-align:center;}
+
+  ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-thumb{background:#2a3a5e; border-radius:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app">
+    <div class="logo">🧭 Task Compass</div>
+    <div class="subtitle">Learn how work flows through real organizations.</div>
+  </header>
+
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
+    <span class="stage-pill" id="stagePill">Stage 1</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-label" id="progressLabel">0 / 9</span>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ============== DATA ============== */
+const ROLES = {
+  "Nurse":{emoji:"👩‍⚕️",color:"var(--nurse)"},
+  "Physician":{emoji:"🩺",color:"var(--physician)"},
+  "Pharmacist":{emoji:"💊",color:"var(--pharmacist)"},
+  "Lab Technician":{emoji:"🧪",color:"var(--lab)"},
+  "Radiologist":{emoji:"🩻",color:"var(--radiologist)"},
+  "Patient Care Coordinator":{emoji:"🗂️",color:"var(--pcc)"},
+  "Hospital Administrator":{emoji:"🏥",color:"var(--admin)"},
+  "IT / Health Records":{emoji:"💻",color:"var(--it)"},
+  "Front Desk / Registration":{emoji:"📋",color:"var(--frontdesk)"},
+  "Case Manager":{emoji:"🤝",color:"var(--casemgr)"}
+};
+const ROLE_NAMES = Object.keys(ROLES);
+
+const STAGE1_POOL = [
+  {task:"A patient's medication dosage seems higher than standard guidelines allow.",
+   options:["Pharmacist","Physician","Nurse","Lab Technician","Hospital Administrator","IT / Health Records"],
+   owner:"Pharmacist", why:"Pharmacists are the medication-safety checkpoint — they verify dosages against guidelines and drug interactions before anything reaches the patient.",
+   assist:["Physician","Nurse"]},
+  {task:"A patient's lab results are delayed by six hours, holding up a diagnosis.",
+   options:["Lab Technician","Nurse","Physician","Radiologist","Case Manager","Front Desk / Registration"],
+   owner:"Lab Technician", why:"The lab technician runs and processes the test — they own the turnaround time and can identify where the delay is happening.",
+   assist:["Nurse","Physician"]},
+  {task:"A patient says the discharge paperwork is confusing and doesn't explain next steps.",
+   options:["Case Manager","Nurse","Front Desk / Registration","Physician","Pharmacist","Hospital Administrator"],
+   owner:"Case Manager", why:"Case managers own the discharge plan end-to-end, translating clinical instructions into a clear plan the patient can actually follow.",
+   assist:["Nurse","Front Desk / Registration"]},
+  {task:"An X-ray image failed to upload into the patient's chart.",
+   options:["Radiologist","IT / Health Records","Nurse","Physician","Lab Technician","Hospital Administrator"],
+   owner:"IT / Health Records", why:"This is a systems/records failure, not a clinical one — IT & Health Records owns getting data correctly into the chart.",
+   assist:["Radiologist"]},
+  {task:"A patient waited two hours past their scheduled appointment time.",
+   options:["Front Desk / Registration","Patient Care Coordinator","Physician","Nurse","Hospital Administrator","Case Manager"],
+   owner:"Front Desk / Registration", why:"Front desk/registration manages the scheduling flow and is closest to spotting and explaining bottlenecks in patient wait times.",
+   assist:["Patient Care Coordinator","Physician"]},
+  {task:"A patient's electronic health record lists the wrong allergy information.",
+   options:["IT / Health Records","Nurse","Physician","Pharmacist","Case Manager","Radiologist"],
+   owner:"Nurse", why:"The nurse is usually the first to catch and correct a record error during care, then routes it for a permanent fix.",
+   assist:["Physician","IT / Health Records"]},
+  {task:"A hospital ward is understaffed for the upcoming night shift.",
+   options:["Hospital Administrator","Nurse","Patient Care Coordinator","Physician","Case Manager","IT / Health Records"],
+   owner:"Hospital Administrator", why:"Staffing levels are an operational/resourcing decision — that authority sits with hospital administration.",
+   assist:["Nurse","Patient Care Coordinator"]},
+  {task:"A patient needs help coordinating follow-up care after surgery.",
+   options:["Patient Care Coordinator","Case Manager","Nurse","Physician","Front Desk / Registration","Pharmacist"],
+   owner:"Patient Care Coordinator", why:"Patient care coordinators own the handoff between departments and outside providers so nothing falls through the cracks.",
+   assist:["Case Manager","Nurse"]},
+  {task:"A nurse notices a patient's vital signs are quietly worsening.",
+   options:["Nurse","Physician","Lab Technician","Case Manager","Hospital Administrator","Radiologist"],
+   owner:"Nurse", why:"Nurses monitor vitals continuously — they own the first response and the decision to escalate urgently.",
+   assist:["Physician"]},
+  {task:"A prescription refill request comes in after clinic hours.",
+   options:["Pharmacist","Physician","Nurse","Front Desk / Registration","Case Manager","IT / Health Records"],
+   owner:"Pharmacist", why:"Pharmacists handle refill verification directly and loop in the physician only when a change to the prescription is needed.",
+   assist:["Physician"]}
+];
+
+const STAGE2_POOL = [
+  {task:"A patient reports new chest pain overnight.",
+   sequence:["Nurse","Physician","Lab Technician","Radiologist"],
+   why:"The nurse is first to assess and escalate. The physician evaluates and orders diagnostics. The lab runs bloodwork, and radiology images the chest if needed — each step narrows down the cause."},
+  {task:"A prescription needs to be filled and delivered to a patient's room.",
+   sequence:["Physician","Pharmacist","Nurse"],
+   why:"The physician writes the order, the pharmacist verifies and dispenses it safely, and the nurse administers it at the bedside."},
+  {task:"A patient is being discharged after a multi-day hospital stay.",
+   sequence:["Physician","Case Manager","Front Desk / Registration","Patient Care Coordinator"],
+   why:"The physician clears the patient medically, the case manager builds the discharge plan, front desk processes the paperwork, and the care coordinator sets up follow-up."},
+  {task:"A referral to an outside specialist is requested.",
+   sequence:["Physician","Case Manager","Patient Care Coordinator"],
+   why:"The physician identifies the need, the case manager handles insurance and referral logistics, and the coordinator schedules and confirms the appointment."},
+  {task:"A billing question comes up after a patient's treatment.",
+   sequence:["Front Desk / Registration","IT / Health Records","Hospital Administrator"],
+   why:"Front desk fields the initial question, health records/IT confirms what services were logged, and administration resolves any policy-level dispute."}
+];
+
+const STAGE3_POOL = [
+  {task:"Patient satisfaction scores drop sharply across the hospital this quarter.",
+   primary:"Hospital Administrator",
+   supporting:["Nurse","Patient Care Coordinator","Front Desk / Registration"],
+   why:"This is a systemic pattern, not one team's fault. Administration coordinates the response, while frontline teams surface what patients are actually experiencing.",
+   flow:["Hospital Administrator","Nurse","Front Desk / Registration","Patient Care Coordinator"]},
+  {task:"A sudden spike in emergency room admissions strains hospital capacity.",
+   primary:"Hospital Administrator",
+   supporting:["Physician","Nurse","Case Manager"],
+   why:"Administration reallocates resources and staffing, physicians and nurses manage the clinical surge, and case managers speed up safe discharges to free beds.",
+   flow:["Hospital Administrator","Physician","Nurse","Case Manager"]},
+  {task:"Multiple patients report medication errors in the same week.",
+   primary:"Pharmacist",
+   supporting:["Nurse","Physician","IT / Health Records"],
+   why:"Pharmacy leads the safety review, nurses and physicians report what happened at the point of care, and health records checks whether a systems issue contributed.",
+   flow:["Nurse","Pharmacist","Physician","IT / Health Records"]},
+  {task:"A new electronic health record system rollout is delayed hospital-wide.",
+   primary:"IT / Health Records",
+   supporting:["Hospital Administrator","Physician","Nurse"],
+   why:"IT owns the technical rollout, administration manages timelines and budget, and clinical staff flag what's actually blocking real-world use.",
+   flow:["IT / Health Records","Hospital Administrator","Physician","Nurse"]},
+  {task:"Online reviews increasingly mention long wait times and rushed appointments.",
+   primary:"Hospital Administrator",
+   supporting:["Front Desk / Registration","Nurse","Patient Care Coordinator"],
+   why:"This pattern points to scheduling and capacity — administration adjusts operations while frontline staff explain where time is actually being lost.",
+   flow:["Front Desk / Registration","Hospital Administrator","Nurse","Patient Care Coordinator"]}
+];
+
+function pick(arr,n){
+  const copy=[...arr]; const out=[];
+  while(out.length<n && copy.length){ out.push(copy.splice(Math.floor(Math.random()*copy.length),1)[0]); }
+  return out;
+}
+
+const state = {
+  stage:0, // 0 intro, 1,2,3, 4 final
+  s1: pick(STAGE1_POOL,3), s1i:0, s1score:0,
+  s2: pick(STAGE2_POOL,3), s2i:0, s2score:0,
+  s3: pick(STAGE3_POOL,3), s3i:0, s3score:0, s3collabScore:0,
+  totalSteps:9, doneSteps:0
+};
+
+const appEl = document.getElementById('app');
+const progressWrap = document.getElementById('progressWrap');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+const stagePill = document.getElementById('stagePill');
+
+function updateProgress(){
+  const pct = Math.round((state.doneSteps/state.totalSteps)*100);
+  progressFill.style.width = pct+'%';
+  progressLabel.textContent = state.doneSteps+' / '+state.totalSteps;
+  stagePill.textContent = 'Stage '+Math.min(state.stage,3);
+}
+
+function roleCard(name, draggable=true){
+  const r = ROLES[name];
+  const d = document.createElement('div');
+  d.className='role-card';
+  d.style.setProperty('--role-color', r.color);
+  d.draggable = draggable;
+  d.dataset.role = name;
+  d.innerHTML = `<span class="emoji">${r.emoji}</span><span class="rname">${name}</span>`;
+  if(draggable){
+    d.addEventListener('dragstart', e=>{ d.classList.add('dragging'); e.dataTransfer.setData('text/plain', name); });
+    d.addEventListener('dragend', ()=> d.classList.remove('dragging'));
+    d.addEventListener('click', ()=> d.dispatchEvent(new CustomEvent('rolepick',{bubbles:true, detail:name})) );
+  }
+  return d;
+}
+
+function makeSlot(placeholder){
+  const s = document.createElement('div');
+  s.className='slot';
+  s.textContent = placeholder;
+  s.addEventListener('dragover', e=>{ e.preventDefault(); s.classList.add('highlight'); });
+  s.addEventListener('dragleave', ()=> s.classList.remove('highlight'));
+  return s;
+}
+
+function fillSlot(slot, name){
+  const r = ROLES[name];
+  slot.classList.add('filled','snap');
+  slot.style.borderColor = r.color;
+  slot.innerHTML = `<span style="margin-right:6px;">${r.emoji}</span>${name}`;
+  slot.dataset.role = name;
+  setTimeout(()=> slot.classList.remove('snap'), 400);
+}
+
+/* ============== INTRO ============== */
+function renderIntro(){
+  progressWrap.style.display='none';
+  appEl.innerHTML = `
+    <div class="card">
+      <div class="ticket">
+        <div class="ticket-tag">Setting</div>
+        <div class="ticket-text">🏥 Hospital / Healthcare — you'll step through real situations from a busy hospital: who owns a task, how it routes between departments, and when it takes a team.</div>
+      </div>
+      <p style="color:var(--sub); font-size:.92rem; line-height:1.6;">
+        Three short stages. No trick questions — every choice gets explained, not graded pass/fail.
+        You'll build your own understanding of ownership, delegation, collaboration and workflow as you go.
+      </p>
+      <div class="intro-btn-row"><button class="primary" id="startBtn">Start Simulation →</button></div>
+    </div>
+  `;
+  document.getElementById('startBtn').onclick = ()=>{ state.stage=1; renderStage1(); };
+}
+
+/* ============== STAGE 1 : OWNERSHIP ============== */
+function renderStage1(){
+  progressWrap.style.display='flex'; updateProgress();
+  const item = state.s1[state.s1i];
+  const wrap = document.createElement('div');
+  wrap.className='card';
+  wrap.innerHTML = `
+    <div class="ticket">
+      <div class="ticket-tag">Stage 1 · Who Owns This? (${state.s1i+1}/3)</div>
+      <div class="ticket-text">${item.task}</div>
+    </div>
+    <div class="ownership-slot-wrap">
+      <div class="label">Drag the primary owner here</div>
+      <div class="ownership-slot"></div>
+    </div>
+    <div class="role-grid" id="roleGrid"></div>
+    <div class="actions">
+      <button class="primary" id="submitBtn" disabled>Submit</button>
+    </div>
+    <div id="revealBox"></div>
+  `;
+  appEl.innerHTML=''; appEl.appendChild(wrap);
+
+  const slot = wrap.querySelector('.ownership-slot');
+  slot.classList.add('slot');
+  slot.textContent = 'Drop role here';
+  const grid = wrap.querySelector('#roleGrid');
+  const submitBtn = wrap.querySelector('#submitBtn');
+  let chosen = null;
+
+  item.options.forEach(name=>{
+    const c = roleCard(name);
+    c.addEventListener('rolepick', e=>{ selectRole(e.detail); });
+    grid.appendChild(c);
+  });
+
+  slot.addEventListener('dragover', e=> e.preventDefault());
+  slot.addEventListener('drop', e=>{
+    e.preventDefault(); slot.classList.remove('highlight');
+    const name = e.dataTransfer.getData('text/plain');
+    selectRole(name);
+  });
+
+  function selectRole(name){
+    chosen = name;
+    fillSlot(slot, name);
+    submitBtn.disabled = false;
+  }
+
+  submitBtn.onclick = ()=>{
+    if(!chosen) return;
+    submitBtn.disabled = true;
+    const correct = chosen === item.owner;
+    if(correct) state.s1score++;
+    const reveal = wrap.querySelector('#revealBox');
+    reveal.innerHTML = `
+      <div class="reveal">
+        <h4>${correct ? '✓ You matched the primary owner' : '↳ The primary owner was actually '+item.owner}</h4>
+        <p><strong>Primary Owner:</strong> ${ROLES[item.owner].emoji} ${item.owner}</p>
+        <p class="why"><strong>Why:</strong> ${item.why}</p>
+        <p><strong>May assist:</strong></p>
+        <div class="assist-tags">${item.assist.map(a=>`<span>${ROLES[a].emoji} ${a}</span>`).join('')}</div>
+      </div>
+    `;
+    const nextBtn = document.createElement('button');
+    nextBtn.className='primary'; nextBtn.style.marginTop='14px'; nextBtn.textContent = state.s1i<2 ? 'Next Task →' : 'Continue to Stage 2 →';
+    reveal.querySelector('.reveal').appendChild(document.createElement('br'));
+    reveal.querySelector('.reveal').appendChild(nextBtn);
+    nextBtn.onclick = ()=>{
+      state.doneSteps++;
+      state.s1i++;
+      if(state.s1i<3){ renderStage1(); } else { state.stage=2; renderStage2(); }
+    };
+  };
+}
+
+/* ============== STAGE 2 : ROUTING ============== */
+function renderStage2(){
+  updateProgress();
+  const item = state.s2[state.s2i];
+  const n = item.sequence.length;
+  const pool = pick([...new Set([...item.sequence, ...pick(ROLE_NAMES.filter(r=>!item.sequence.includes(r)), 3)])], Math.min(8, n+3));
+  const shuffledPool = pick(pool, pool.length);
+
+  const wrap = document.createElement('div');
+  wrap.className='card';
+  wrap.innerHTML = `
+    <div class="ticket">
+      <div class="ticket-tag">Stage 2 · Task Routing (${state.s2i+1}/3)</div>
+      <div class="ticket-text">${item.task}</div>
+    </div>
+    <div class="hint">Drag roles into order — the task needs ${n} step${n>1?'s':''}.</div>
+    <div class="route-row" id="routeRow"></div>
+    <div class="role-grid" id="roleGrid2"></div>
+    <div class="actions"><button class="primary" id="submitBtn2" disabled>Submit Route</button></div>
+    <div id="revealBox2"></div>
+  `;
+  appEl.innerHTML=''; appEl.appendChild(wrap);
+
+  const routeRow = wrap.querySelector('#routeRow');
+  const slots = [];
+  for(let i=0;i<n;i++){
+    const s = makeSlot('Step '+(i+1));
+    routeRow.appendChild(s);
+    slots.push(s);
+    if(i<n-1){ const a=document.createElement('span'); a.className='arrow'; a.textContent='→'; routeRow.appendChild(a); }
+  }
+
+  const grid2 = wrap.querySelector('#roleGrid2');
+  const submitBtn2 = wrap.querySelector('#submitBtn2');
+  const filled = [];
+
+  shuffledPool.forEach(name=>{
+    const c = roleCard(name);
+    c.addEventListener('rolepick', e=> placeInFirstEmpty(e.detail, c));
+    grid2.appendChild(c);
+  });
+
+  slots.forEach(s=>{
+    s.addEventListener('drop', e=>{
+      e.preventDefault(); s.classList.remove('highlight');
+      const name = e.dataTransfer.getData('text/plain');
+      if(s.classList.contains('filled')) return;
+      const cardEl = [...grid2.children].find(c=>c.dataset.role===name && !c.classList.contains('used'));
+      if(cardEl) placeInSlot(name, s, cardEl);
+    });
+  });
+
+  function placeInFirstEmpty(name, cardEl){
+    const target = slots.find(s=>!s.classList.contains('filled'));
+    if(target) placeInSlot(name, target, cardEl);
+  }
+  function placeInSlot(name, slot, cardEl){
+    fillSlot(slot, name);
+    cardEl.classList.add('used');
+    filled.push(name);
+    submitBtn2.disabled = slots.some(s=>!s.classList.contains('filled'));
+  }
+
+  submitBtn2.onclick = ()=>{
+    submitBtn2.disabled = true;
+    const chosenOrder = slots.map(s=>s.dataset.role);
+    const correct = JSON.stringify(chosenOrder) === JSON.stringify(item.sequence);
+    if(correct) state.s2score++;
+    const reveal = wrap.querySelector('#revealBox2');
+    reveal.innerHTML = `<div class="reveal"><h4>${correct ? '✓ That routing matches how it commonly flows' : '↳ Here is how this task usually flows'}</h4>
+      <div class="flow-anim" id="flowAnim"></div>
+      <p class="why"><strong>Why this order:</strong> ${item.why}</p>
+    </div>`;
+    const flowAnim = reveal.querySelector('#flowAnim');
+    item.sequence.forEach((name,i)=>{
+      const chip = document.createElement('div');
+      chip.className='flow-chip';
+      chip.style.animationDelay=(i*0.25)+'s';
+      chip.innerHTML = `<span class="em">${ROLES[name].emoji}</span>${name}`;
+      flowAnim.appendChild(chip);
+      if(i<item.sequence.length-1){
+        const a=document.createElement('span'); a.className='arrow'; a.style.opacity='0';
+        a.style.animation='flowIn .4s ease forwards'; a.style.animationDelay=(i*0.25+0.12)+'s';
+        a.textContent='→'; flowAnim.appendChild(a);
+      }
+    });
+    const nextBtn = document.createElement('button');
+    nextBtn.className='primary'; nextBtn.style.marginTop='14px';
+    nextBtn.textContent = state.s2i<2 ? 'Next Task →' : 'Continue to Stage 3 →';
+    reveal.querySelector('.reveal').appendChild(document.createElement('br'));
+    reveal.querySelector('.reveal').appendChild(nextBtn);
+    nextBtn.onclick = ()=>{
+      state.doneSteps++;
+      state.s2i++;
+      if(state.s2i<3){ renderStage2(); } else { state.stage=3; renderStage3(); }
+    };
+  };
+}
+
+/* ============== STAGE 3 : COLLABORATION ============== */
+function renderStage3(){
+  updateProgress();
+  const item = state.s3[state.s3i];
+  const idealSet = new Set([item.primary, ...item.supporting]);
+  const distractors = pick(ROLE_NAMES.filter(r=>!idealSet.has(r)), 3);
+  const optionPool = pick([...idealSet, ...distractors], Math.min(9, idealSet.size+3));
+
+  const wrap = document.createElement('div');
+  wrap.className='card';
+  wrap.innerHTML = `
+    <div class="ticket">
+      <div class="ticket-tag">Stage 3 · Collaboration Challenge (${state.s3i+1}/3)</div>
+      <div class="ticket-text">${item.task}</div>
+    </div>
+    <div class="hint">Drag up to 4 roles you'd involve. Then click ⭐ on the one you'd call the <strong>primary owner</strong>.</div>
+    <div class="collab-grid" id="collabGrid"></div>
+    <div class="role-grid" id="roleGrid3"></div>
+    <div class="actions"><button class="primary" id="submitBtn3" disabled>Submit</button></div>
+    <div id="revealBox3"></div>
+  `;
+  appEl.innerHTML=''; appEl.appendChild(wrap);
+
+  const collabGrid = wrap.querySelector('#collabGrid');
+  const cSlots = [];
+  for(let i=0;i<4;i++){ const s=makeSlot('Assign role'); collabGrid.appendChild(s); cSlots.push(s); }
+
+  const grid3 = wrap.querySelector('#roleGrid3');
+  const submitBtn3 = wrap.querySelector('#submitBtn3');
+  let primaryPick = null;
+  const assigned = [];
+
+  optionPool.forEach(name=>{
+    const c = roleCard(name);
+    c.addEventListener('rolepick', e=> placeCollab(e.detail, c));
+    grid3.appendChild(c);
+  });
+
+  cSlots.forEach(s=>{
+    s.addEventListener('drop', e=>{
+      e.preventDefault(); s.classList.remove('highlight');
+      const name = e.dataTransfer.getData('text/plain');
+      if(s.classList.contains('filled')) return;
+      const cardEl = [...grid3.children].find(c=>c.dataset.role===name && !c.classList.contains('used'));
+      if(cardEl) placeIntoCollabSlot(name, s, cardEl);
+    });
+  });
+
+  function placeCollab(name, cardEl){
+    const target = cSlots.find(s=>!s.classList.contains('filled'));
+    if(target) placeIntoCollabSlot(name, target, cardEl);
+  }
+  function placeIntoCollabSlot(name, slot, cardEl){
+    fillSlot(slot, name);
+    cardEl.classList.add('used');
+    assigned.push(name);
+    const star = document.createElement('div');
+    star.textContent='⭐'; star.style.position='absolute'; star.style.top='4px'; star.style.right='6px';
+    star.style.cursor='pointer'; star.style.fontSize='1rem'; star.style.opacity='.35';
+    star.title='Mark as primary owner';
+    star.onclick = ()=>{
+      cSlots.forEach(s=>{ const st=s.querySelector('div'); if(st) st.style.opacity='.35'; });
+      star.style.opacity='1';
+      primaryPick = name;
+      checkReady();
+    };
+    slot.appendChild(star);
+    checkReady();
+  }
+  function checkReady(){ submitBtn3.disabled = !(assigned.length>=1 && primaryPick); }
+
+  submitBtn3.onclick = ()=>{
+    submitBtn3.disabled = true;
+    const primaryCorrect = primaryPick === item.primary;
+    const overlap = assigned.filter(a=> idealSet.has(a) && a!==primaryPick).length;
+    const idealSupportCount = item.supporting.length;
+    const collabPct = idealSupportCount ? Math.min(1, overlap/idealSupportCount) : 1;
+    if(primaryCorrect) state.s3score++;
+    state.s3collabScore += collabPct;
+
+    const reveal = wrap.querySelector('#revealBox3');
+    reveal.innerHTML = `<div class="reveal">
+      <h4>${primaryCorrect ? '✓ Good call on the primary owner' : '↳ The primary owner is usually '+item.primary}</h4>
+      <p><strong>Primary Owner:</strong> ${ROLES[item.primary].emoji} ${item.primary}</p>
+      <p><strong>Supporting Teams:</strong></p>
+      <div class="assist-tags">${item.supporting.map(a=>`<span>${ROLES[a].emoji} ${a}</span>`).join('')}</div>
+      <p class="why" style="margin-top:8px;"><strong>Reasoning:</strong> ${item.why}</p>
+      <p><strong>Possible Communication Flow:</strong></p>
+      <div class="flow-anim" id="flowAnim3"></div>
+    </div>`;
+    const flowAnim3 = reveal.querySelector('#flowAnim3');
+    item.flow.forEach((name,i)=>{
+      const chip = document.createElement('div');
+      chip.className='flow-chip'; chip.style.animationDelay=(i*0.25)+'s';
+      chip.innerHTML = `<span class="em">${ROLES[name].emoji}</span>${name}`;
+      flowAnim3.appendChild(chip);
+      if(i<item.flow.length-1){
+        const a=document.createElement('span'); a.className='arrow'; a.style.opacity='0';
+        a.style.animation='flowIn .4s ease forwards'; a.style.animationDelay=(i*0.25+0.12)+'s';
+        a.textContent='→'; flowAnim3.appendChild(a);
+      }
+    });
+    const nextBtn = document.createElement('button');
+    nextBtn.className='primary'; nextBtn.style.marginTop='14px';
+    nextBtn.textContent = state.s3i<2 ? 'Next Situation →' : 'See My Results →';
+    reveal.querySelector('.reveal').appendChild(document.createElement('br'));
+    reveal.querySelector('.reveal').appendChild(nextBtn);
+    nextBtn.onclick = ()=>{
+      state.doneSteps++;
+      state.s3i++;
+      if(state.s3i<3){ renderStage3(); } else { state.stage=4; renderFinal(); }
+    };
+  };
+}
+
+/* ============== FINAL ============== */
+function renderFinal(){
+  updateProgress();
+  const ownership = Math.round((state.s1score/3)*100);
+  const workflow = Math.round((state.s2score/3)*100);
+  const delegation = Math.round((state.s3score/3)*100);
+  const collaboration = Math.round((state.s3collabScore/3)*100);
+  const scores = {Ownership:ownership, Delegation:delegation, Collaboration:collaboration, "Workflow Thinking":workflow};
+
+  const wrap = document.createElement('div');
+  wrap.className='card final-wrap';
+  wrap.innerHTML = `
+    <div class="confetti">🎉🧭🎉</div>
+    <h2 style="margin:4px 0;">Simulation Complete</h2>
+    <p style="color:var(--sub);">Here's how your thinking mapped across the four areas.</p>
+    <div class="bars" id="bars"></div>
+    <div class="reflection" id="reflection"></div>
+    <div class="intro-btn-row"><button class="ghost" id="restartBtn">Run Simulation Again</button></div>
+  `;
+  appEl.innerHTML=''; appEl.appendChild(wrap);
+
+  const barsEl = wrap.querySelector('#bars');
+  const colors = {Ownership:"var(--nurse)", Delegation:"var(--physician)", Collaboration:"var(--casemgr)", "Workflow Thinking":"var(--admin)"};
+  Object.entries(scores).forEach(([label,val])=>{
+    const row = document.createElement('div'); row.className='bar-row';
+    row.innerHTML = `<div class="barlabel"><span>${label}</span><span>${val}%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="background:${colors[label]}"></div></div>`;
+    barsEl.appendChild(row);
+    setTimeout(()=>{ row.querySelector('.bar-fill').style.width = val+'%'; }, 200);
+  });
+
+  const strong = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+  const weak = Object.entries(scores).sort((a,b)=>a[1]-b[1])[0][0];
+  const overAssigned = state.s3collabScore < 1.3;
+  const underCollab = collaboration < 60;
+
+  const reflection = wrap.querySelector('#reflection');
+  reflection.innerHTML = `
+    <div class="block"><h5>What you understood well</h5>
+      <p>You showed the strongest instincts around <strong>${strong}</strong> — your picks there tracked closely with how these situations tend to play out in a real hospital.</p></div>
+    <div class="block"><h5>Where you tended to over-assign responsibility</h5>
+      <p>${overAssigned ? "In a few collaboration scenarios, single roles may have been asked to cover ground that's normally shared with another team — worth watching for." : "You generally avoided piling responsibility onto one role, spreading tasks close to how hospitals actually split them."}</p></div>
+    <div class="block"><h5>Where you underestimated collaboration</h5>
+      <p>${underCollab ? "Some of the larger situations likely needed more supporting teams than were assigned — complex problems in hospitals rarely stay contained to one department." : "You leaned toward involving multiple teams in complex situations, which tends to match how these are handled in practice."}</p></div>
+    <p class="insight">💡 Many real workplace problems — especially in hospitals — are solved by teams coordinating in sequence, rather than any single person acting alone.</p>
+  `;
+
+  wrap.querySelector('#restartBtn').onclick = ()=>{
+    Object.assign(state, {
+      stage:0, s1: pick(STAGE1_POOL,3), s1i:0, s1score:0,
+      s2: pick(STAGE2_POOL,3), s2i:0, s2score:0,
+      s3: pick(STAGE3_POOL,3), s3i:0, s3score:0, s3collabScore:0,
+      doneSteps:0
+    });
+    renderIntro();
+  };
+}
+
+renderIntro();
+</script>
+</body>
+</html>
